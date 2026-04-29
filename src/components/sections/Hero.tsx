@@ -13,6 +13,7 @@ export default function Hero() {
         alt="Installation de micro-station d'épuration par ENE"
         fill
         priority
+        sizes="100vw"
         className="object-cover"
         quality={85}
       />

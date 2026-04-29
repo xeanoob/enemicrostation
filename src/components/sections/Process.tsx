@@ -56,6 +56,7 @@ export default function Process() {
               alt="Camion ENE SAS sur la route"
               width={565}
               height={343}
+              sizes="(max-width: 768px) 100vw, 565px"
               className="w-full h-auto border border-gray-200"
               quality={85}
             />
