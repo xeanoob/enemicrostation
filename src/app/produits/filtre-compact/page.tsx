@@ -44,7 +44,7 @@ export default function FiltreCompactPage() {
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
-              <p className="text-xs text-gray-400 mt-2 italic">Fonctionnement du filtre compact Tricel Seta</p>
+              <p className="text-xs text-gray-500 mt-2 italic">Fonctionnement du filtre compact Tricel Seta</p>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function FiltreCompactPage() {
           <div className="w-16 h-1 bg-primary-400 mb-6" />
           <div className="relative w-full aspect-video bg-black">
             <iframe
-              src="https://www.youtube.com/embed/RDHj1cGnVqE"
+              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
               title="ENE SAS - Filtre compact Tricel Seta"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -128,7 +128,7 @@ export default function FiltreCompactPage() {
                 <p className="font-bold text-gray-800 text-sm">Brochure Tricel Seta</p>
                 <p className="text-xs text-gray-500">Filtre compact Tricel Seta</p>
               </div>
-              <Download size={18} className="text-gray-400 shrink-0" />
+              <Download size={18} className="text-gray-500 shrink-0" />
             </a>
             <a href="/docs/brochure-tricel-seta-simplex.pdf" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all">
@@ -139,7 +139,7 @@ export default function FiltreCompactPage() {
                 <p className="font-bold text-gray-800 text-sm">Brochure Tricel Seta Simplex</p>
                 <p className="text-xs text-gray-500">Filtre compact monocuve</p>
               </div>
-              <Download size={18} className="text-gray-400 shrink-0" />
+              <Download size={18} className="text-gray-500 shrink-0" />
             </a>
           </div>
         </div>

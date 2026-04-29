@@ -43,7 +43,7 @@ export default function EauxGrisesPage() {
             className="w-full h-auto border border-gray-200 mt-4"
             quality={85}
           />
-          <p className="text-xs text-gray-400 mt-2 italic mb-4">Schéma de traitement des eaux grises</p>
+          <p className="text-xs text-gray-500 mt-2 italic mb-4">Schéma de traitement des eaux grises</p>
         </div>
       </section>
 

@@ -73,7 +73,7 @@ export default function MicroStationsPage() {
                 Nos techniciens s&apos;occupent de la livraison et de la mise en route afin de garder
                 la <strong>garantie fabricant de 20 ans pour la cuve</strong> et de 2 ans pour les autres éléments.
               </p>
-              <p className="text-xs text-gray-400 mt-4">
+              <p className="text-xs text-gray-500 mt-4">
                 Intervention sur les départements 18 / 58 / 03 / 36 / 23 / 63 / 15 / 43.
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function MicroStationsPage() {
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
-              <p className="text-xs text-gray-400 mt-2 italic">Schéma de fonctionnement de la micro-station Tricel Novo</p>
+              <p className="text-xs text-gray-500 mt-2 italic">Schéma de fonctionnement de la micro-station Tricel Novo</p>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@ export default function MicroStationsPage() {
                 <p className="font-bold text-gray-800 text-sm">Brochure Tricel Novo</p>
                 <p className="text-xs text-gray-500">Microstations d&apos;épuration à culture fixée</p>
               </div>
-              <Download size={18} className="text-gray-400 shrink-0" />
+              <Download size={18} className="text-gray-500 shrink-0" />
             </a>
             <a
               href="/docs/guide-utilisation-tricel-novo.pdf"
@@ -189,7 +189,7 @@ export default function MicroStationsPage() {
                 <p className="font-bold text-gray-800 text-sm">Guide d&apos;utilisation Tricel Novo</p>
                 <p className="text-xs text-gray-500">Assainissement non collectif — 21-50 EH</p>
               </div>
-              <Download size={18} className="text-gray-400 shrink-0" />
+              <Download size={18} className="text-gray-500 shrink-0" />
             </a>
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function MicroStationsPage() {
           <div className="w-16 h-1 bg-primary-400 mb-6" />
           <div className="relative w-full aspect-video bg-black">
             <iframe
-              src="https://www.youtube.com/embed/lxdgtN82HM4?si=nBx2YgOvY8KJ49vc"
+              src="https://www.youtube-nocookie.com/embed/lxdgtN82HM4?si=nBx2YgOvY8KJ49vc"
               title="ENE SAS - Micro-station Tricel Novo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

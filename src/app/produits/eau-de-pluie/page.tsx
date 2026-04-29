@@ -45,7 +45,7 @@ export default function EauDePluiePage() {
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
-              <p className="text-xs text-gray-400 mt-2 italic">Schéma de fonctionnement</p>
+              <p className="text-xs text-gray-500 mt-2 italic">Schéma de fonctionnement</p>
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function EauDePluiePage() {
                 <li>Nettoyer les sols</li>
                 <li>Laver le linge (avec traitement adapté)</li>
               </ul>
-              <p className="text-xs text-gray-400 mt-3 italic">
+              <p className="text-xs text-gray-500 mt-3 italic">
                 Attention : interdit en aval d&apos;un toit contenant de l&apos;amiante-ciment ou du plomb.
               </p>
             </div>
@@ -123,7 +123,7 @@ export default function EauDePluiePage() {
           <div className="w-16 h-1 bg-primary-400 mb-6" />
           <div className="relative w-full aspect-video bg-black">
             <iframe
-              src="https://www.youtube.com/embed/RDHj1cGnVqE"
+              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
               title="ENE SAS - Récupération eau de pluie"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -154,7 +154,7 @@ export default function EauDePluiePage() {
                   <p className="font-bold text-gray-800 text-xs sm:text-sm">{doc.title}</p>
                   <p className="text-xs text-gray-500">{doc.sub}</p>
                 </div>
-                <Download size={16} className="text-gray-400 shrink-0" />
+                <Download size={16} className="text-gray-500 shrink-0" />
               </a>
             ))}
           </div>

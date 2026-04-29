@@ -56,7 +56,7 @@ export default function TemoignagesPage() {
               {/* Video */}
               <div className="relative w-full aspect-video bg-black">
                 <iframe
-                  src={`https://www.youtube.com/embed/${t.videoId}`}
+                  src={`https://www.youtube-nocookie.com/embed/${t.videoId}`}
                   title={`Témoignage ${t.name}`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

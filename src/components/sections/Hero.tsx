@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section className="relative h-[550px] md:h-[600px]">
       <Image
-        src="/images/hero-bg.jpg"
+        src="/images/hero-bg.webp"
         alt="Installation de micro-station d'épuration par ENE"
         fill
         priority

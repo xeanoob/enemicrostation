@@ -74,7 +74,7 @@ export default function ContactPage() {
                 <div className="flex items-center gap-2 mb-8">
                   {[1, 2, 3].map((s) => (
                     <div key={s} className="flex items-center gap-2 flex-1">
-                      <div className={`w-8 h-8 flex items-center justify-center text-sm font-bold ${step >= s ? "bg-primary-400 text-white" : "bg-gray-200 text-gray-400"}`}>
+                      <div className={`w-8 h-8 flex items-center justify-center text-sm font-bold ${step >= s ? "bg-primary-400 text-white" : "bg-gray-200 text-gray-500"}`}>
                         {s}
                       </div>
                       {s < 3 && <div className={`flex-1 h-0.5 ${step > s ? "bg-primary-400" : "bg-gray-200"}`} />}

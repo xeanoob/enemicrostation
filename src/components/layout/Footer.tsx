@@ -28,9 +28,9 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider text-gray-300 mb-4">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-300 mb-4">
               Navigation
-            </h4>
+            </h3>
             <ul className="space-y-2 text-sm">
               {[
                 { label: "Produits", href: "/produits" },
@@ -49,9 +49,9 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider text-gray-300 mb-4">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-300 mb-4">
               Contact
-            </h4>
+            </h3>
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-primary-400 shrink-0 mt-0.5" />
@@ -75,7 +75,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-800">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} ENE SAS – Tous droits réservés</p>
           <a
             href="https://www.facebook.com/ENEmicrostation.epuration"

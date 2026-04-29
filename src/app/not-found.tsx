@@ -28,7 +28,7 @@ export default function NotFound() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-200">
-          <p className="text-xs text-gray-400 mb-3">Vous cherchez peut-être :</p>
+          <p className="text-xs text-gray-500 mb-3">Vous cherchez peut-être :</p>
           <div className="flex flex-wrap justify-center gap-2">
             {[
               { label: "Micro-stations", href: "/produits/micro-stations" },

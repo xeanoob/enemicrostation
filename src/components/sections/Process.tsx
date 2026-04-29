@@ -54,7 +54,7 @@ export default function Process() {
               <h3 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">ENE SAS en vidéo</h3>
               <div className="relative w-full aspect-video bg-black">
                 <iframe
-                  src="https://www.youtube.com/embed/RDHj1cGnVqE"
+                  src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
                   title="ENE SAS - Présentation"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

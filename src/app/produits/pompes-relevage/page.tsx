@@ -60,7 +60,7 @@ export default function PompesPage() {
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
-              <p className="text-xs text-gray-400 italic">Schéma de fonctionnement Califosse</p>
+              <p className="text-xs text-gray-500 italic">Schéma de fonctionnement Califosse</p>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function PompesPage() {
           <div className="w-16 h-1 bg-primary-400 mb-6" />
           <div className="relative w-full aspect-video bg-black">
             <iframe
-              src="https://www.youtube.com/embed/RDHj1cGnVqE"
+              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
               title="ENE SAS - Pompes de relevage"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -119,7 +119,7 @@ export default function PompesPage() {
               <p className="font-bold text-gray-800 text-sm">Pompes de relevage</p>
               <p className="text-xs text-gray-500">Par Calpeda</p>
             </div>
-            <Download size={18} className="text-gray-400 shrink-0" />
+            <Download size={18} className="text-gray-500 shrink-0" />
           </a>
         </div>
       </section>
