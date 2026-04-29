@@ -19,6 +19,7 @@ const navLinks = [
       { label: "Eaux grises", href: "/produits/eaux-grises" },
     ],
   },
+  { label: "Livraison", href: "/livraison" },
   { label: "Témoignages", href: "/temoignages" },
   { label: "Contact", href: "/contact" },
 ];

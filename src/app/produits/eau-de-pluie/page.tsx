@@ -38,13 +38,14 @@ export default function EauDePluiePage() {
             </div>
             <div>
               <Image
-                src="/images/chantier.jpeg"
-                alt="Installation cuve de récupération d'eau de pluie"
+                src="/images/eau-pluie-schema.jpg"
+                alt="Schéma de récupération d'eau de pluie"
                 width={600}
                 height={400}
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
+              <p className="text-xs text-gray-400 mt-2 italic">Schéma de fonctionnement</p>
             </div>
           </div>
         </div>
@@ -55,7 +56,7 @@ export default function EauDePluiePage() {
           <h2 className="text-xl font-bold text-gray-800 mb-2">Le fonctionnement</h2>
           <div className="w-16 h-1 bg-primary-400 mb-6" />
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="bg-white border border-gray-200 p-5">
               <h3 className="font-bold text-primary-400 text-sm uppercase mb-2">1. Collecter et filtrer</h3>
               <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
@@ -67,7 +68,7 @@ export default function EauDePluiePage() {
               <h3 className="font-bold text-primary-400 text-sm uppercase mb-2">2. Stocker</h3>
               <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
                 <li>Remplissage de la cuve par un tube plongeant pour éviter les remous.</li>
-                <li>Trop plein d&apos;évacuation lorsque la cuve est totalement pleine. L&apos;eau récupérée en surface permet d&apos;évacuer les flottants.</li>
+                <li>Trop plein d&apos;évacuation lorsque la cuve est totalement pleine.</li>
               </ul>
             </div>
             <div className="bg-white border border-gray-200 p-5">
@@ -86,7 +87,6 @@ export default function EauDePluiePage() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-xl font-bold text-gray-800 mb-2">Ce que dit la loi</h2>
           <div className="w-16 h-1 bg-primary-400 mb-5" />
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="bg-gray-50 border border-gray-200 p-5">
               <h3 className="font-bold text-gray-800 mb-3">Usage intérieur</h3>
@@ -108,8 +108,7 @@ export default function EauDePluiePage() {
               </ul>
             </div>
           </div>
-
-          <div className="mt-8 bg-gray-50 border border-gray-200 p-5">
+          <div className="mt-6 bg-gray-50 border border-gray-200 p-5">
             <h3 className="font-bold text-gray-800 mb-2">Cuves grands volumes (10 à 130 m³)</h3>
             <p className="text-sm text-gray-600 mb-2"><strong>Collectivités :</strong> réserves incendie, arrosage de stade, de plantations, remplissage de balayeuse, chasses d&apos;eau de salle des fêtes…</p>
             <p className="text-sm text-gray-600"><strong>Industrie :</strong> arrosage de pelouses, process sur machines-outils, lavage des sols et du matériel, piste de lavage de voitures…</p>

@@ -37,13 +37,14 @@ export default function FiltreCompactPage() {
             </div>
             <div>
               <Image
-                src="/images/fossactiver.jpg"
-                alt="Filtre compact Tricel Seta Simplex"
-                width={600}
-                height={400}
+                src="/images/fonctionnement-seta.webp"
+                alt="Schéma de fonctionnement du filtre compact Tricel Seta"
+                width={1024}
+                height={542}
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
+              <p className="text-xs text-gray-400 mt-2 italic">Fonctionnement du filtre compact Tricel Seta</p>
             </div>
           </div>
         </div>
@@ -76,8 +77,27 @@ export default function FiltreCompactPage() {
         </div>
       </section>
 
-      {/* Documentation */}
+      {/* Photos installations */}
       <section className="py-10 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">Nos installations</h2>
+          <div className="w-16 h-1 bg-primary-400 mb-6" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[
+              { src: "/images/filtre-1.jpg", alt: "Installation filtre compact 1" },
+              { src: "/images/filtre-2.jpg", alt: "Installation filtre compact 2" },
+              { src: "/images/fossactiver.jpg", alt: "Produit Foss'Activer" },
+            ].map((img) => (
+              <div key={img.src} className="relative aspect-square overflow-hidden border border-gray-200">
+                <Image src={img.src} alt={img.alt} fill className="object-cover" quality={75} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Documentation */}
+      <section className="py-10 sm:py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-xl font-bold text-gray-800 mb-2">Documentation Tricel</h2>
           <div className="w-16 h-1 bg-primary-400 mb-6" />
@@ -105,10 +125,6 @@ export default function FiltreCompactPage() {
               <Download size={18} className="text-gray-400 shrink-0" />
             </a>
           </div>
-          <p className="text-sm text-gray-500 mt-6 leading-relaxed">
-            Parce que mettre aux normes son assainissement n&apos;est pas chose simple et que nous en sommes conscients,
-            nous mettons tout en œuvre pour vous accompagner au mieux dans votre projet et vos démarches.
-          </p>
         </div>
       </section>
 

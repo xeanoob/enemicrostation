@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Phone } from "lucide-react";
 
 export default function EauxGrisesPage() {
@@ -33,6 +34,16 @@ export default function EauxGrisesPage() {
             puis par une <strong>filtration membranaire</strong> ainsi qu&apos;un traitement chloré si besoin.
             Les eaux filtrées et traitées sont ensuite stockées pour être réutilisées.
           </p>
+
+          <Image
+            src="/images/eaux-grises-schema.jpg"
+            alt="Schéma traitement des eaux grises"
+            width={768}
+            height={543}
+            className="w-full h-auto border border-gray-200 mt-4"
+            quality={85}
+          />
+          <p className="text-xs text-gray-400 mt-2 italic mb-4">Schéma de traitement des eaux grises</p>
         </div>
       </section>
 

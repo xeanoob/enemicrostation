@@ -43,15 +43,24 @@ export default function PompesPage() {
                 l&apos;entretien et le SAV.
               </p>
             </div>
-            <div>
+            <div className="space-y-4">
               <Image
-                src="/images/installation.jpg"
-                alt="Installation pompe de relevage"
-                width={600}
-                height={400}
+                src="/images/pompe-calpeda.jpg"
+                alt="Pompe Calpeda"
+                width={226}
+                height={300}
+                className="w-full max-w-[226px] h-auto border border-gray-200 mx-auto"
+                quality={85}
+              />
+              <Image
+                src="/images/califosse-schema.jpg"
+                alt="Schéma Califosse poste de relevage"
+                width={1024}
+                height={374}
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
+              <p className="text-xs text-gray-400 italic">Schéma de fonctionnement Califosse</p>
             </div>
           </div>
         </div>
