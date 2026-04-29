@@ -49,19 +49,7 @@ export default function Process() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="space-y-6"
           >
-            {/* ENE SAS en vidéo */}
-            <div>
-              <h3 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">ENE SAS en vidéo</h3>
-              <div className="relative w-full aspect-video bg-black">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
-                  title="ENE SAS - Présentation"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </div>
+
 
             <Image
               src="/images/camion-ene.jpg"
