@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Témoignages Clients",
-  description: "Découvrez les retours d'expérience de nos clients : mairies, professionnels et particuliers satisfaits de nos micro-stations Tricel Novo.",
+  title: "Témoignages Clients - Avis Micro-Stations Tricel",
+  description: "Découvrez les témoignages de nos clients : maires, particuliers et professionnels satisfaits de nos micro-stations Tricel Novo. Plus de 3600 clients depuis 2006.",
+  alternates: { canonical: "https://enemicrostation.fr/temoignages" },
+  openGraph: {
+    title: "Témoignages Clients - ENE SAS",
+    description: "Avis et retours de nos clients sur les micro-stations Tricel Novo installées par ENE SAS.",
+    url: "https://enemicrostation.fr/temoignages",
+  },
 };
 
-export default function TemoignagesLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return children;
 }

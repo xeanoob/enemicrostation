@@ -9,13 +9,16 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-10">
           {/* Company */}
           <div>
-            <Image
-              src="/images/logo-ene.jpeg"
-              alt="ENE SAS"
-              width={160}
-              height={45}
-              className="h-10 w-auto brightness-0 invert mb-4"
-            />
+            <Link href="/">
+              <Image
+                src="/images/logo-ene.jpeg"
+                alt="ENE SAS"
+                width={160}
+                height={45}
+                className="h-10 w-auto mb-2 rounded bg-white p-1"
+              />
+            </Link>
+            <p className="text-white font-bold text-sm mb-1">ENE SAS</p>
             <p className="text-gray-400 text-sm leading-relaxed">
               Depuis 2006, nous sommes spécialisés dans les micro-stations
               d&#39;épuration et filtres compacts, solutions d&#39;assainissement
