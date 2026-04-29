@@ -35,9 +35,23 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://enemicrostation.fr",
     siteName: "ENE - Environnement Nature Équilibre",
-    title: "ENE - Spécialiste Micro-Station d'Épuration",
+    title: "ENE SAS - Spécialiste Micro-Station d'Épuration",
     description:
       "Spécialiste de l'assainissement non collectif depuis 2006. Micro-stations Tricel, filtres compacts, installation et entretien.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ENE SAS - Environnement Nature Équilibre",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ENE SAS - Spécialiste Micro-Station d'Épuration",
+    description: "Spécialiste de l'assainissement non collectif depuis 2006.",
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
