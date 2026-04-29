@@ -24,9 +24,12 @@ const phases = [
 ];
 
 const tanks = [
-  { src: "/images/tank-fr6.webp", label: "Tricel Novo FR6" },
-  { src: "/images/tank-2.webp", label: "Tricel Novo (gamme étendue)" },
-  { src: "/images/tank-3.webp", label: "Tricel Novo (semi-collective)" },
+  { src: "/images/tank-fr6.webp", label: "Tricel FR6 1-6EH 3/4000 Litres" },
+  { src: "/images/tank-2.webp", label: "Tricel FR9 7-9EH 5/6000 Litres" },
+  { src: "/images/tank-3.webp", label: "Tricel FR11 10-11EH 6/7000 Litres" },
+  { src: "/images/tank-4.png.webp.png.webp", label: "Tricel FR14 12-14EH 8000 Litres" },
+  { src: "/images/tank-5.png.webp.png.webp", label: "Tricel FR17 15-17EH 9000 Litres" },
+  { src: "/images/Tank-6.png.webp.png.webp", label: "Tricel FR20 18-20EH 10000 Litres" },
 ];
 
 export default function MicroStationsPage() {
@@ -231,22 +234,20 @@ export default function MicroStationsPage() {
         </div>
       </section>
 
-      {/* Photos chantier */}
+      {/* Vidéo réalisations */}
       <section className="py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Nos installations</h2>
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Nos réalisations</h2>
           <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { src: "/images/chantier.jpeg", alt: "Chantier d'installation ENE" },
-              { src: "/images/chantier-2.jpeg", alt: "Installation micro-station" },
-              { src: "/images/chantier-3.jpeg", alt: "Pose de micro-station" },
-              { src: "/images/installation.jpg", alt: "Mise en service micro-station" },
-            ].map((img) => (
-              <div key={img.src} className="relative aspect-square overflow-hidden border border-gray-200">
-                <Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-105 transition-transform duration-300" quality={75} />
-              </div>
-            ))}
+          <div className="relative w-full aspect-video bg-black border border-gray-200">
+            <video 
+              controls 
+              className="absolute inset-0 w-full h-full object-cover"
+              poster="/images/chantier.jpeg"
+            >
+              <source src="/images/25-Most-Beautiful-Destinations-in-the-World-2.mp4" type="video/mp4" />
+              Votre navigateur ne supporte pas la balise vidéo.
+            </video>
           </div>
         </div>
       </section>
