@@ -221,7 +221,7 @@ export default function MicroStationsPage() {
           <div className="w-16 h-1 bg-primary-400 mb-6" />
           <div className="relative w-full aspect-video bg-black">
             <iframe
-              src="https://www.youtube.com/embed/RDHj1cGnVqE"
+              src="https://www.youtube.com/embed/lxdgtN82HM4?si=nBx2YgOvY8KJ49vc"
               title="ENE SAS - Micro-station Tricel Novo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

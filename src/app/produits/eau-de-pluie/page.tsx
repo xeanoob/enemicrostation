@@ -116,6 +116,24 @@ export default function EauDePluiePage() {
         </div>
       </section>
 
+      {/* Vidéo */}
+      <section className="py-10 sm:py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">Présentation vidéo</h2>
+          <div className="w-16 h-1 bg-primary-400 mb-6" />
+          <div className="relative w-full aspect-video bg-black">
+            <iframe
+              src="https://www.youtube.com/embed/RDHj1cGnVqE"
+              title="ENE SAS - Récupération eau de pluie"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Documentation */}
       <section className="py-10 sm:py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">

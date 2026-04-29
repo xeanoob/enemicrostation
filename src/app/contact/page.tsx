@@ -99,20 +99,20 @@ export default function ContactPage() {
                     )}
                     {step === 2 && (
                       <motion.div key="s2" initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -15 }} className="space-y-3">
-                        <input type="text" placeholder="Identité *" value={form.name} onChange={(e) => update("name", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
+                        <input type="text" aria-label="Identité" placeholder="Identité *" value={form.name} onChange={(e) => update("name", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
                         <div className="grid sm:grid-cols-2 gap-3">
-                          <input type="tel" placeholder="Téléphone *" value={form.phone} onChange={(e) => update("phone", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
-                          <input type="email" placeholder="E-mail *" value={form.email} onChange={(e) => update("email", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
+                          <input type="tel" aria-label="Téléphone" placeholder="Téléphone *" value={form.phone} onChange={(e) => update("phone", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
+                          <input type="email" aria-label="E-mail" placeholder="E-mail *" value={form.email} onChange={(e) => update("email", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
                         </div>
                         <div className="grid sm:grid-cols-2 gap-3">
-                          <input type="text" placeholder="Code postal *" value={form.postalCode} onChange={(e) => update("postalCode", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
-                          <input type="text" placeholder="Ville *" value={form.city} onChange={(e) => update("city", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
+                          <input type="text" aria-label="Code postal" placeholder="Code postal *" value={form.postalCode} onChange={(e) => update("postalCode", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
+                          <input type="text" aria-label="Ville" placeholder="Ville *" value={form.city} onChange={(e) => update("city", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none" />
                         </div>
                       </motion.div>
                     )}
                     {step === 3 && (
                       <motion.div key="s3" initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -15 }}>
-                        <textarea placeholder="Message *" rows={6} value={form.message} onChange={(e) => update("message", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none resize-none" />
+                        <textarea aria-label="Message" placeholder="Message *" rows={6} value={form.message} onChange={(e) => update("message", e.target.value)} required className="w-full px-4 py-2.5 border border-gray-200 text-sm focus:border-primary-400 focus:ring-1 focus:ring-primary-200 outline-none resize-none" />
                       </motion.div>
                     )}
                   </AnimatePresence>

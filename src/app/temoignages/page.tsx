@@ -1,75 +1,102 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { MapPin, Star, Quote } from "lucide-react";
+import Link from "next/link";
+import { Phone, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Jean Deleume",
+    name: "Jean DELEUME",
     role: "Maire de Mars-sur-Allier (58)",
-    content: "Après avoir consulté différentes entreprises, la mairie était partie sur une filière classique. Après avoir vu la brochure Tricel, nous avons opté pour une micro-station Novo 18 EH, avec un devis inférieur de 20% par rapport à la fosse septique avec épandage. L'installation a été rapide et professionnelle.",
+    videoId: "qjX93px88CI?si=QQQCnvHmIul9HJwJ",
+    text: `En février 2012, les propriétaires de l'hôtel « Au Rendez-Vous des Cigognes » sur la commune de Mars-sur-Allier ont fait don de l'établissement à la mairie, don qui a été accepté à l'unanimité par le conseil municipal. Hôtel où l'assainissement devait être refait car non conforme aux normes en vigueur.
+
+Après avoir consulté différentes entreprises pour cette réhabilitation, la mairie était partie au départ sur une filière classique comme une fosse septique avec épandage mais le devis était élevé car il fallait installer une pompe de relevage pour aller au filtre à sable.
+
+Après avoir vu la brochure des micro-stations de Tricel, la mairie a pris rendez-vous avec le distributeur régional de Tricel (ENE Energies Nouvelles Environnement) pour étudier les propositions que pouvait proposer le distributeur. Partant sur une micro-station Tricel Novo équivalent 18 habitants, ENE a établi un devis, d'un prix inférieur de 20% par rapport à la fosse septique avec un épandage. Après que le conseil municipal ait accepté à l'unanimité le dispositif, l'installation a pu être entreprise.`,
   },
   {
-    name: "Michel Hérault",
+    name: "Michel HÉRAULT",
     role: "Maire de Villeneuve-sur-Cher (18)",
-    content: "Après un an d'utilisation, la mairie est satisfaite du système d'assainissement posé, surtout pour le service après-vente. Nous recommandons le dispositif à tous les particuliers qui ont des problèmes avec leur fosse septique. Les micro-stations sont l'avenir de l'assainissement.",
+    videoId: "zRqdqWRki4k?si=cj4siCWNKp-2ZvD3",
+    text: `La mairie de Villeneuve-sur-Cher a installé une micro-station d'épuration Tricel Novo pour ses deux salles des fêtes d'une capacité de 200 personnes pour la plus grande et 50 pour l'autre.
+
+Après un an d'utilisation, la mairie est satisfaite du système d'assainissement non collectif posé, surtout pour le service après-vente et recommande le dispositif à tous les particuliers qui ont aujourd'hui des problèmes avec leur fosse septique.
+
+Selon le maire, les micro-stations d'épuration sont l'avenir de l'assainissement.`,
   },
   {
-    name: "Jean-Marc Duguet",
+    name: "Jean-Marc DUGUET",
     role: "Maire de Saint-Georges-sur-la-Prée (18)",
-    content: "La Tricel Novo est le produit le plus performant. Elle est très fiable, sans incidence sur la maintenance. Facile à installer puisqu'elle peut être posée en une seule journée : terrassement, pose et installation client compris.",
+    videoId: "_q6erbjURVo?si=BR19vWK1gpU_qxyA",
+    text: `M. Duguet nous présente les avantages les plus importants d'installer des micro-stations Tricel Novo.
+
+Depuis 2011, il est possible en France d'installer des micro-stations agréées, notamment la Tricel Novo 6 EH (Équivalent-Habitants) pour 4 à 6 habitants.
+
+Aujourd'hui, la Tricel Novo est le produit le plus performant selon M. Duguet car elle est très fiable (aucune incidence sur la maintenance et le suivi de la clientèle). Facile à installer puisqu'elle peut être posée en une seule journée : terrassement, pose et installation client compris.`,
   },
 ];
 
 export default function TemoignagesPage() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
     <>
-      <section className="bg-primary-400 py-12">
+      <section className="bg-primary-400 py-10">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-white">Témoignages de nos clients</h1>
-          <p className="text-white/80 mt-2">Ils nous font confiance depuis des années.</p>
-        </div>
-      </section>
-
-      <section className="py-8 bg-gray-50 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="text-gray-600">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Témoignages de nos clients</h1>
+          <p className="text-white/80 mt-2 text-sm sm:text-base">
             Nous parcourons des centaines de kilomètres tous les jours pour installer du matériel
-            et réaliser nos maintenances. Voici quelques témoignages.
+            et réaliser nos maintenances chez tous nos clients.
           </p>
         </div>
       </section>
 
-      <section ref={ref} className="py-16">
-        <div className="max-w-4xl mx-auto px-4 space-y-8">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-white border border-gray-200 p-8 relative"
-            >
-              <Quote size={32} className="absolute top-6 right-6 text-gray-100" />
-              <div className="flex items-center gap-1 mb-4">
-                {[1,2,3,4,5].map((s) => <Star key={s} size={16} className="text-yellow-400 fill-yellow-400" />)}
+      <section className="py-10 sm:py-16">
+        <div className="max-w-4xl mx-auto px-4 space-y-12">
+          {testimonials.map((t) => (
+            <article key={t.name} className="border border-gray-200 bg-white">
+              {/* Video */}
+              <div className="relative w-full aspect-video bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/${t.videoId}`}
+                  title={`Témoignage ${t.name}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full"
+                />
               </div>
-              <p className="text-gray-600 leading-relaxed mb-6">&laquo; {t.content} &raquo;</p>
-              <div className="flex items-center gap-3 border-t border-gray-100 pt-4">
-                <div className="w-10 h-10 bg-primary-400 flex items-center justify-center text-white font-bold text-sm">
-                  {t.name.charAt(0)}
+
+              {/* Text */}
+              <div className="p-5 sm:p-8">
+                <div className="flex items-start gap-3 mb-4">
+                  <Quote size={24} className="text-primary-400 shrink-0 mt-1" />
+                  <div>
+                    <p className="font-bold text-gray-800 text-base">{t.name}</p>
+                    <p className="text-xs text-primary-400 font-medium">{t.role}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-gray-800 text-sm">{t.name}</p>
-                  <p className="text-xs text-gray-500 flex items-center gap-1"><MapPin size={12} /> {t.role}</p>
-                </div>
+                {t.text.split("\n\n").map((para, i) => (
+                  <p key={i} className="text-sm text-gray-600 leading-relaxed mb-3 last:mb-0">
+                    {para}
+                  </p>
+                ))}
               </div>
-            </motion.div>
+            </article>
           ))}
+        </div>
+      </section>
+
+      <section className="py-10 bg-primary-400">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Rejoignez nos 3600+ clients satisfaits</h2>
+          <p className="text-white/80 mb-6 text-sm">Contactez-nous pour votre projet d&apos;assainissement.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-3">
+            <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
+              Demander un devis
+            </Link>
+            <a href="tel:0248760284" className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
+              <Phone size={16} /> 02 48 76 02 84
+            </a>
+          </div>
         </div>
       </section>
     </>
