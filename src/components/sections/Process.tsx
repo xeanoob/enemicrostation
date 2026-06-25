@@ -37,7 +37,7 @@ export default function Process() {
                 02 48 76 02 84
               </a>
               <p className="text-white/80 text-sm mt-2">
-                Les micro-stations TRICEL sont homologuées de 1 à 20 équivalent habitant
+                Les micro-stations TRICEL sont homologuées de 1 à 50 équivalent habitant
               </p>
             </div>
           </motion.div>

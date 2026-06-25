@@ -51,7 +51,7 @@ export default function ContactPage() {
               {[
                 { icon: MapPin, title: "Nous rendre visite (sur RDV)", lines: ["10 avenue des Fédérés", "18600 SANCOINS"] },
                 { icon: Phone, title: "Appelez-nous", lines: ["02 48 76 02 84"] },
-                { icon: Clock, title: "Nos horaires", lines: ["Lun-Ven : 8h à 12h", "puis de 14h à 18h"] },
+                { icon: Clock, title: "Nos horaires", lines: ["Lun-Jeu : 8h à 12h / 13h à 17h30", "Ven : 8h à 12h"] },
                 { icon: Mail, title: "Par e-mail", lines: ["contact@ene-sas.fr"] },
               ].map((item) => (
                 <div key={item.title} className="p-5 bg-gray-50 border border-gray-200">

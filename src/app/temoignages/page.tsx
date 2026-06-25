@@ -87,7 +87,7 @@ export default function TemoignagesPage() {
 
       <section className="py-10 bg-primary-400">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Rejoignez nos 3600+ clients satisfaits</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Rejoignez nos 4000+ clients satisfaits</h2>
           <p className="text-white/80 mb-6 text-sm">Contactez-nous pour votre projet d&apos;assainissement.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">

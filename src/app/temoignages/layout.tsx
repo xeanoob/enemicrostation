@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Témoignages Clients - Avis Micro-Stations Tricel",
-  description: "Découvrez les témoignages de nos clients : maires, particuliers et professionnels satisfaits de nos micro-stations Tricel Novo. Plus de 3600 clients depuis 2006.",
+  description: "Découvrez les témoignages de nos clients : maires, particuliers et professionnels satisfaits de nos micro-stations Tricel Novo. Plus de 4000 clients depuis 2006.",
   alternates: { canonical: "https://enemicrostation.fr/temoignages" },
   openGraph: {
     title: "Témoignages Clients - ENE SAS",

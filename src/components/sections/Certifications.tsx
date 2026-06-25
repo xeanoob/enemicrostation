@@ -5,10 +5,10 @@ import { useRef } from "react";
 import { Award, Users, UserCheck, Truck } from "lucide-react";
 
 const stats = [
-  { number: "18", label: "Ans d'expérience", icon: Award },
-  { number: "3600", label: "Plus de 3000 clients", icon: Users },
-  { number: "8", label: "Collaborateurs", icon: UserCheck },
-  { number: "6", label: "Véhicules dédiés", icon: Truck },
+  { number: "20", label: "Ans d'expérience", icon: Award },
+  { number: "4000", label: "Plus de 4000 clients", icon: Users },
+  { number: "7", label: "Collaborateurs", icon: UserCheck },
+  { number: "8", label: "Véhicules dédiés", icon: Truck },
 ];
 
 export default function Certifications() {

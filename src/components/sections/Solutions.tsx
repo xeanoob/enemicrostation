@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 const solutions = [
   {
     title: "Micro-station d'épuration",
-    desc: "Solution compacte Tricel Novo, remplace la fosse septique et le champ d'épandage sur seulement 5m². Silencieuse, sans odeur, de 1 à 20 EH.",
+    desc: "Solution compacte Tricel Novo, remplace la fosse septique et le champ d'épandage sur seulement 5m². Silencieuse, sans odeur, de 1 à 50 EH.",
     href: "/produits/micro-stations",
     image: "/images/micro-station.jpg",
   },

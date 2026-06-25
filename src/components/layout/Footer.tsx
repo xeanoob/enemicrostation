@@ -65,9 +65,9 @@ export default function Footer() {
                 <Mail size={16} className="text-primary-400 shrink-0" />
                 <a href="mailto:contact@ene-sas.fr" className="hover:text-white transition-colors">contact@ene-sas.fr</a>
               </li>
-              <li className="flex items-center gap-2">
-                <Clock size={16} className="text-primary-400 shrink-0" />
-                Lun-Ven : 8h-12h / 14h-18h
+              <li className="flex items-start gap-2">
+                <Clock size={16} className="text-primary-400 shrink-0 mt-0.5" />
+                <span>Lun-Jeu : 8h-12h / 13h-17h30<br />Ven : 8h-12h</span>
               </li>
             </ul>
           </div>

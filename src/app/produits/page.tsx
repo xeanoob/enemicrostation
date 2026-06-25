@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { Droplets, Filter, Waves, CloudRain, Recycle, ArrowRight } from "lucide-react";
 
 const products = [
-  { icon: Droplets, title: "Micro-station d'épuration", desc: "Solution compacte Tricel Novo basée sur le procédé de culture fixée immergée aérobie. Remplace fosse septique et champ d'épandage sur seulement 5m². Homologuée de 1 à 20 EH.", href: "/produits/micro-stations", image: "/images/micro-station.jpg" },
+  { icon: Droplets, title: "Micro-station d'épuration", desc: "Solution compacte Tricel Novo basée sur le procédé de culture fixée immergée aérobie. Remplace fosse septique et champ d'épandage sur seulement 5m². Homologuée de 1 à 50 EH.", href: "/produits/micro-stations", image: "/images/micro-station.jpg" },
   { icon: Filter, title: "Filtre compact", desc: "Alternative performante avec un média filtrant naturel pour le traitement des eaux usées domestiques, nécessitant peu d'énergie.", href: "/produits/filtre-compact", image: "/images/fossactiver.jpg" },
   { icon: Waves, title: "Pompes et postes de relevage", desc: "Solutions de relevage adaptées à toutes configurations de terrain pour l'évacuation efficace des eaux usées et pluviales.", href: "/produits/pompes-relevage", image: "/images/installation.jpg" },
   { icon: CloudRain, title: "Réutilisation d'eau de pluie", desc: "Systèmes de stockage et de valorisation de l'eau de pluie pour une démarche écologique et économique au quotidien.", href: "/produits/eau-de-pluie", image: "/images/chantier.jpeg" },
