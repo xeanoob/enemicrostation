@@ -12,12 +12,44 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://enemicrostation.fr" },
 };
 
-export default function Home() {
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+
+export default async function Home() {
+  let heroData = { title: "ENE SAS", subtitle: "Énergies Nouvelles Environnement" };
+  let productsList: any[] = [];
+
+  try {
+    if (isSanityConfigured) {
+      // Fetch homepage configurations
+      const homepageData = await client.fetch(`*[_type == "homepage"][0]`);
+      if (homepageData) {
+        heroData = {
+          title: homepageData.title || "ENE SAS",
+          subtitle: homepageData.subtitle || "Énergies Nouvelles Environnement"
+        };
+      }
+
+      // Fetch products list
+      const sanityProducts = await client.fetch(`*[_type == "product"]`);
+      if (sanityProducts && sanityProducts.length > 0) {
+        productsList = sanityProducts.map((p: any) => ({
+          title: p.title,
+          desc: p.description,
+          href: p.slug?.current ? `/produits/${p.slug.current}` : "/produits",
+          image: p.image ? urlFor(p.image).url() : "/images/micro-station.jpg"
+        }));
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch from Sanity, using default values:", error);
+  }
+
   return (
     <>
-      <Hero />
+      <Hero title={heroData.title} subtitle={heroData.subtitle} />
       <Certifications />
-      <Solutions />
+      <Solutions items={productsList} />
       <Process />
       <WhyUs />
       <CTA />

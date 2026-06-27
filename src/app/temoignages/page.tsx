@@ -1,9 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import { Phone, Quote } from "lucide-react";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
 
-const testimonials = [
+const defaultTestimonials = [
   {
     name: "Jean DELEUME",
     role: "Maire de Mars-sur-Allier (58)",
@@ -41,7 +40,20 @@ Aujourd'hui, la Tricel Novo est le produit le plus performant selon M. Duguet ca
   },
 ];
 
-export default function TemoignagesPage() {
+export default async function TemoignagesPage() {
+  let testimonials = defaultTestimonials;
+
+  try {
+    // Only try to fetch if Sanity is configured
+    if (isSanityConfigured) {
+      const sanityTestimonials = await client.fetch(`*[_type == "testimonial"]`);
+      if (sanityTestimonials && sanityTestimonials.length > 0) {
+        testimonials = sanityTestimonials;
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch from Sanity, falling back to local testimonials:", error);
+  }
   return (
     <>
       <section className="bg-primary-400 py-10">

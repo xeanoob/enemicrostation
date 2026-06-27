@@ -6,7 +6,14 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
-const solutions = [
+interface Solution {
+  title: string;
+  desc: string;
+  href: string;
+  image: string;
+}
+
+const defaultSolutions = [
   {
     title: "Micro-station d'épuration",
     desc: "Solution compacte Tricel Novo, remplace la fosse septique et le champ d'épandage sur seulement 5m². Silencieuse, sans odeur, de 1 à 50 EH.",
@@ -39,7 +46,8 @@ const solutions = [
   },
 ];
 
-export default function Solutions() {
+export default function Solutions({ items }: { items?: Solution[] }) {
+  const solutions = items && items.length > 0 ? items : defaultSolutions;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 

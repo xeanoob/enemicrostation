@@ -5,7 +5,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({
+  title = "ENE SAS",
+  subtitle = "Énergies Nouvelles Environnement"
+}: {
+  title?: string;
+  subtitle?: string;
+}) {
   return (
     <section className="relative h-[550px] md:h-[600px]">
       <Image
@@ -27,10 +33,10 @@ export default function Hero() {
           className="max-w-2xl"
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-2">
-            ENE SAS
+            {title}
           </h1>
           <p className="text-xl sm:text-2xl text-primary-200 font-medium mb-4">
-            Énergies Nouvelles Environnement
+            {subtitle}
           </p>
           <p className="text-white/70 text-base md:text-lg mb-3">
             Spécialiste en assainissement depuis 2006
