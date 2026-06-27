@@ -4,6 +4,11 @@ import { Phone, FileText, Download } from "lucide-react";
 import { getSanityClient } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
+const defaultDocs = [
+  { title: "Gamme EVOMAX", subtitle: "Fiche technique EVOMAX", href: "#" },
+  { title: "Gamme Minibox / Sanibox", subtitle: "Postes de relevage Calpeda", href: "#" },
+];
+
 export default async function PompesPage() {
   let title = "Pompes et postes de relevage";
   let subtitle = "Solutions de relevage adaptées à tous les besoins";
@@ -13,11 +18,21 @@ export default async function PompesPage() {
   let detailsText = "Dans tous les cas, nous en assurons l&apos;étude, la livraison et si besoin la mise en route, l&apos;entretien et le SAV.";
   let schemaImage = "/images/installation.jpg";
   let phone = "02 48 76 02 84";
+  let docs = defaultDocs;
 
   try {
     const sanityClient = await getSanityClient();
     if (sanityClient) {
-      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "pompes-relevage"][0]`);
+      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "pompes-relevage"][0] {
+        ...,
+        "resolvedDocs": documents[] {
+          title,
+          subtitle,
+          externalUrl,
+          "fileUrl": file.asset->url
+        }
+      }`);
+
       if (pageData) {
         title = pageData.title || title;
         subtitle = pageData.subtitle || subtitle;
@@ -29,6 +44,13 @@ export default async function PompesPage() {
         detailsText = pageData.detailsText || detailsText;
         if (pageData.schemaImage) {
           schemaImage = urlFor(pageData.schemaImage).url();
+        }
+        if (pageData.resolvedDocs && pageData.resolvedDocs.length > 0) {
+          docs = pageData.resolvedDocs.map((d: any) => ({
+            title: d.title,
+            subtitle: d.subtitle,
+            href: d.fileUrl || d.externalUrl || "#",
+          }));
         }
       }
 
@@ -60,31 +82,22 @@ export default async function PompesPage() {
               <div className="w-16 h-1 bg-primary-400 mb-5" />
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText }} />
               
-              <ul className="text-sm sm:text-base text-gray-600 list-disc list-inside space-y-1 mb-6">
-                {benefits.map((b, i) => (
-                  <li key={i} dangerouslySetInnerHTML={{ __html: b }} />
+              <ul className="text-sm sm:text-base text-gray-600 list-disc list-inside space-y-2">
+                {benefits.map((benefit, i) => (
+                  <li key={i} dangerouslySetInnerHTML={{ __html: benefit }} />
                 ))}
               </ul>
-              <p className="text-sm text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: detailsText }} />
             </div>
-            <div className="space-y-4">
+            <div>
               <Image
-                src="/images/pompe-calpeda.jpg"
-                alt="Pompe Calpeda"
-                width={226}
-                height={300}
-                className="w-full max-w-[226px] h-auto border border-gray-200 mx-auto"
-                quality={85}
-              />
-              <Image
-                src="/images/califosse-schema.jpg"
-                alt="Schéma Califosse poste de relevage"
-                width={1024}
-                height={374}
+                src={schemaImage}
+                alt="Poste de relevage"
+                width={600}
+                height={400}
                 className="w-full h-auto border border-gray-200"
                 quality={85}
               />
-              <p className="text-xs text-gray-500 italic">Schéma de fonctionnement Califosse</p>
+              <p className="text-xs text-gray-500 mt-2 italic">Exemple d'installation d'un poste de relevage double pompe</p>
             </div>
           </div>
         </div>
@@ -92,49 +105,41 @@ export default async function PompesPage() {
 
       <section className="py-10 sm:py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Pour quelle utilité ?</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">Notre prestation</h2>
           <div className="w-16 h-1 bg-primary-400 mb-5" />
-          <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-            Les pompes Calpeda sont conçues pour assurer une gestion efficace de l&apos;eau,
-            qu&apos;il s&apos;agisse d&apos;eau potable ou d&apos;eaux claires. Elles sont idéales pour :
-          </p>
-          <ul className="text-sm sm:text-base text-gray-600 list-disc list-inside space-y-2 mb-4">
-            <li><strong>L&apos;approvisionnement en eau potable</strong> : Garantissez un approvisionnement continu et fiable
-            pour les résidences, bâtiments commerciaux et installations industrielles.</li>
-            <li><strong>L&apos;irrigation et les systèmes de refroidissement</strong> : Optimisez les systèmes d&apos;irrigation
-            agricoles et les installations industrielles avec des pompes adaptées.</li>
-          </ul>
-          <p className="text-sm text-gray-500">
-            Grâce à leur conception robuste et leur efficacité énergétique, les pompes Calpeda assurent
-            un fonctionnement durable et économique.
-          </p>
+          <p className="text-sm sm:text-base text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: detailsText }} />
         </div>
       </section>
-
 
       {/* Documentation */}
-      <section className="py-10 sm:py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Documentation</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <a href="/docs/pompes-calpeda.pdf" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all max-w-md">
-            <div className="w-12 h-12 bg-red-50 flex items-center justify-center shrink-0">
-              <FileText size={24} className="text-red-500" />
+      {docs && docs.length > 0 && (
+        <section className="py-10 sm:py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Documentation technique</h2>
+            <div className="w-16 h-1 bg-primary-400 mb-6" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {docs.map((doc, idx) => (
+                <a key={idx} href={doc.href} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all">
+                  <div className="w-12 h-12 bg-red-50 flex items-center justify-center shrink-0">
+                    <FileText size={24} className="text-red-500" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-gray-800 text-sm">{doc.title}</p>
+                    <p className="text-xs text-gray-500">{doc.subtitle}</p>
+                  </div>
+                  <Download size={18} className="text-gray-500 shrink-0" />
+                </a>
+              ))}
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-bold text-gray-800 text-sm">Pompes de relevage</p>
-              <p className="text-xs text-gray-500">Par Calpeda</p>
-            </div>
-            <Download size={18} className="text-gray-500 shrink-0" />
-          </a>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       <section className="py-10 bg-primary-400">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Besoin d&apos;une pompe de relevage ?</h2>
-          <p className="text-white/80 mb-6 text-sm">Nous étudions votre configuration et trouvons la solution adaptée.</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Un projet de relevage ?</h2>
+          <p className="text-white/80 mb-6 text-sm">Contactez-nous pour un devis ou une étude technique gratuite.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis

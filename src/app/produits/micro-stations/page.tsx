@@ -21,7 +21,7 @@ const defaultPhases = [
   { icon: FlaskConical, num: "3", title: "Clarification / Décantation finale", desc: "Les boues résiduelles se déposent au fond du bassin de décantation finale, où un système de recirculation basé sur un principe d'airlift les renvoie dans le premier bassin. Les effluents traités répondent aux normes en vigueur et peuvent être évacués vers l'exutoire (infiltration dans le sol, rejet dans le milieu hydraulique superficiel)." },
 ];
 
-const tanks = [
+const defaultTanks = [
   { src: "/images/tank-fr6.webp", label: "Tricel FR6 1-6EH 3/4000 Litres" },
   { src: "/images/tank-2.webp", label: "Tricel FR9 7-9EH 5/6000 Litres" },
   { src: "/images/tank-3.webp", label: "Tricel FR11 10-11EH 6/7000 Litres" },
@@ -29,6 +29,17 @@ const tanks = [
   { src: "/images/tank-5.png.webp.png.webp", label: "Tricel FR17 15-17EH 9000 Litres" },
   { src: "/images/Tank-6.png.webp.png.webp", label: "Tricel FR20 18-20EH 10000 Litres" },
 ];
+
+const defaultDocs = [
+  { title: "Brochure Tricel Novo", subtitle: "Microstations d'épuration à culture fixée", href: "/docs/brochure-tricel-novo.pdf" },
+  { title: "Guide d'utilisation Tricel Novo", subtitle: "Assainissement non collectif — 21-50 EH", href: "/docs/guide-utilisation-tricel-novo.pdf" },
+];
+
+const phaseIconMap: Record<string, any> = {
+  Beaker,
+  Wind,
+  FlaskConical,
+};
 
 export default async function MicroStationsPage() {
   let title = "Micro-station d'épuration Tricel Novo";
@@ -41,11 +52,36 @@ export default async function MicroStationsPage() {
   let schemaImage = "/images/micro-station.jpg";
   let phone = "02 48 76 02 84";
   let benefits = defaultAdvantages.map(a => a.label);
+  let tanks = defaultTanks;
+  let phases = defaultPhases;
+  let docs = defaultDocs;
+  let videoUrl = "https://www.youtube-nocookie.com/embed/lxdgtN82HM4?si=nBx2YgOvY8KJ49vc";
+  let realizationVideoUrl = "/images/25-Most-Beautiful-Destinations-in-the-World-2.mp4";
+  let realizationVideoPoster = "/images/chantier.jpeg";
 
   try {
     const sanityClient = await getSanityClient();
     if (sanityClient) {
-      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "micro-stations"][0]`);
+      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "micro-stations"][0] {
+        ...,
+        "resolvedTanks": tanks[] {
+          label,
+          "src": image.asset->url
+        },
+        "resolvedPhases": phases[] {
+          num,
+          title,
+          desc,
+          iconName
+        },
+        "resolvedDocs": documents[] {
+          title,
+          subtitle,
+          externalUrl,
+          "fileUrl": file.asset->url
+        }
+      }`);
+
       if (pageData) {
         title = pageData.title || title;
         subtitle = pageData.subtitle || subtitle;
@@ -62,6 +98,32 @@ export default async function MicroStationsPage() {
         if (pageData.schemaImage) {
           schemaImage = urlFor(pageData.schemaImage).url();
         }
+        if (pageData.resolvedTanks && pageData.resolvedTanks.length > 0) {
+          tanks = pageData.resolvedTanks.map((t: any) => ({
+            src: t.src || "/images/tank-fr6.webp",
+            label: t.label,
+          }));
+        }
+        if (pageData.resolvedPhases && pageData.resolvedPhases.length > 0) {
+          phases = pageData.resolvedPhases.map((p: any) => ({
+            num: p.num,
+            title: p.title,
+            desc: p.desc,
+            icon: phaseIconMap[p.iconName || ""] || Beaker,
+          }));
+        }
+        if (pageData.resolvedDocs && pageData.resolvedDocs.length > 0) {
+          docs = pageData.resolvedDocs.map((d: any) => ({
+            title: d.title,
+            subtitle: d.subtitle,
+            href: d.fileUrl || d.externalUrl || "#",
+          }));
+        }
+        videoUrl = pageData.videoUrl || videoUrl;
+        realizationVideoUrl = pageData.realizationVideoUrl || realizationVideoUrl;
+        if (pageData.realizationVideoPoster) {
+          realizationVideoPoster = urlFor(pageData.realizationVideoPoster).url();
+        }
       }
 
       const settingsData = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
@@ -75,7 +137,6 @@ export default async function MicroStationsPage() {
 
   const cleanPhone = phone.replace(/\s+/g, "");
 
-  // Map icons dynamically for display
   const finalAdvantages = benefits.map((bLabel) => {
     const matched = defaultAdvantages.find(da => da.label === bLabel);
     return {
@@ -166,7 +227,7 @@ export default async function MicroStationsPage() {
           </p>
 
           <div className="space-y-4">
-            {defaultPhases.map((phase) => (
+            {phases.map((phase) => (
               <div
                 key={phase.num}
                 className="flex flex-col sm:flex-row gap-4 bg-white border border-gray-200 p-5"
@@ -191,36 +252,24 @@ export default async function MicroStationsPage() {
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Documentation Tricel</h2>
           <div className="w-16 h-1 bg-primary-400 mb-8" />
           <div className="grid sm:grid-cols-2 gap-4">
-            <a
-              href="/docs/brochure-tricel-novo.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
-            >
-              <div className="w-12 h-12 bg-red-50 flex items-center justify-center shrink-0">
-                <FileText size={24} className="text-red-500" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-gray-800 text-sm">Brochure Tricel Novo</p>
-                <p className="text-xs text-gray-500">Microstations d&apos;épuration à culture fixée</p>
-              </div>
-              <Download size={18} className="text-gray-500 shrink-0" />
-            </a>
-            <a
-              href="/docs/guide-utilisation-tricel-novo.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
-            >
-              <div className="w-12 h-12 bg-red-50 flex items-center justify-center shrink-0">
-                <FileText size={24} className="text-red-500" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-gray-800 text-sm">Guide d&apos;utilisation Tricel Novo</p>
-                <p className="text-xs text-gray-500">Assainissement non collectif — 21-50 EH</p>
-              </div>
-              <Download size={18} className="text-gray-500 shrink-0" />
-            </a>
+            {docs.map((doc, idx) => (
+              <a
+                key={idx}
+                href={doc.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-5 bg-white border border-gray-200 hover:border-primary-300 hover:shadow-sm transition-all"
+              >
+                <div className="w-12 h-12 bg-red-50 flex items-center justify-center shrink-0">
+                  <FileText size={24} className="text-red-500" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-gray-800 text-sm">{doc.title}</p>
+                  <p className="text-xs text-gray-500">{doc.subtitle}</p>
+                </div>
+                <Download size={18} className="text-gray-500 shrink-0" />
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -245,40 +294,44 @@ export default async function MicroStationsPage() {
       </section>
 
       {/* Vidéo */}
-      <section className="py-12 sm:py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Vidéo de présentation</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="relative w-full aspect-video bg-black">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/lxdgtN82HM4?si=nBx2YgOvY8KJ49vc"
-              title="ENE SAS - Micro-station Tricel Novo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
+      {videoUrl && (
+        <section className="py-12 sm:py-16 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Vidéo de présentation</h2>
+            <div className="w-16 h-1 bg-primary-400 mb-6" />
+            <div className="relative w-full aspect-video bg-black">
+              <iframe
+                src={videoUrl}
+                title="ENE SAS - Vidéo de présentation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Vidéo réalisations */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Nos réalisations</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="relative w-full aspect-video bg-black border border-gray-200">
-            <video 
-              controls 
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover"
-              poster="/images/chantier.jpeg"
-            >
-              <source src="/images/25-Most-Beautiful-Destinations-in-the-World-2.mp4" type="video/mp4" />
-              Votre navigateur ne supporte pas la balise vidéo.
-            </video>
+      {realizationVideoUrl && (
+        <section className="py-12 sm:py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Nos réalisations</h2>
+            <div className="w-16 h-1 bg-primary-400 mb-6" />
+            <div className="relative w-full aspect-video bg-black border border-gray-200">
+              <video 
+                controls 
+                preload="none"
+                className="absolute inset-0 w-full h-full object-cover"
+                poster={realizationVideoPoster}
+              >
+                <source src={realizationVideoUrl} type="video/mp4" />
+                Votre navigateur ne supporte pas la balise vidéo.
+              </video>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-10 bg-primary-400">

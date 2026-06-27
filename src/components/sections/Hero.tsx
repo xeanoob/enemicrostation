@@ -7,15 +7,27 @@ import { Phone } from "lucide-react";
 
 export default function Hero({
   title = "ENE SAS",
-  subtitle = "Énergies Nouvelles Environnement"
+  subtitle = "Énergies Nouvelles Environnement",
+  bg = "/images/hero-bg.jpeg",
+  desc1 = "Spécialiste en assainissement depuis 2006",
+  desc2 = "Conseils, étude, livraison, mise en route, installation, SAV, entretien et maintenance",
+  tags = "Micro-stations d'épuration Tricel • Filtres compacts • Pompes de relevage • Eau de pluie",
+  phone = "02 48 76 02 84",
 }: {
   title?: string;
   subtitle?: string;
+  bg?: string;
+  desc1?: string;
+  desc2?: string;
+  tags?: string;
+  phone?: string;
 }) {
+  const cleanPhone = phone.replace(/\s+/g, "");
+
   return (
     <section className="relative h-[550px] md:h-[600px]">
       <Image
-        src="/images/hero-bg.jpeg"
+        src={bg}
         alt="Installation de micro-station d'épuration par ENE"
         fill
         priority
@@ -38,15 +50,21 @@ export default function Hero({
           <p className="text-xl sm:text-2xl text-primary-200 font-medium mb-4">
             {subtitle}
           </p>
-          <p className="text-white/70 text-base md:text-lg mb-3">
-            Spécialiste en assainissement depuis 2006
-          </p>
-          <p className="text-white/85 text-base md:text-lg mb-3 leading-relaxed">
-            Conseils, étude, livraison, mise en route, installation, SAV, entretien et maintenance
-          </p>
-          <p className="text-white/70 text-sm mb-8">
-            Micro-stations d&apos;épuration Tricel • Filtres compacts • Pompes de relevage • Eau de pluie
-          </p>
+          {desc1 && (
+            <p className="text-white/70 text-base md:text-lg mb-3">
+              {desc1}
+            </p>
+          )}
+          {desc2 && (
+            <p className="text-white/85 text-base md:text-lg mb-3 leading-relaxed">
+              {desc2}
+            </p>
+          )}
+          {tags && (
+            <p className="text-white/70 text-sm mb-8">
+              {tags}
+            </p>
+          )}
           <div className="flex flex-wrap gap-3">
             <Link
               href="/contact"
@@ -61,11 +79,11 @@ export default function Hero({
               Nos produits
             </Link>
             <a
-              href="tel:0248760284"
+              href={`tel:${cleanPhone}`}
               className="px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-gray-800 font-semibold transition-colors text-sm flex items-center gap-2"
             >
               <Phone size={16} />
-              02 48 76 02 84
+              {phone}
             </a>
           </div>
         </motion.div>

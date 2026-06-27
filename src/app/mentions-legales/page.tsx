@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSanityClient } from "@/sanity/lib/fetch";
 
 export const metadata: Metadata = {
   title: "Mentions Légales",
@@ -7,7 +8,35 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function MentionsLegales() {
+export default async function MentionsLegales() {
+  let settings = {
+    phone: "02 48 76 02 84",
+    email: "contact@ene-sas.fr",
+    address: "10 avenue des Fédérés, 18600 SANCOINS",
+    dirPublication: "Frédéric CROSNIER",
+    dataController: "Michel PENARD",
+    siret: "492 843 898 00021",
+  };
+
+  try {
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
+      const sanitySettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
+      if (sanitySettings) {
+        settings = {
+          phone: sanitySettings.phone || settings.phone,
+          email: sanitySettings.email || settings.email,
+          address: sanitySettings.address || settings.address,
+          dirPublication: sanitySettings.dirPublication || settings.dirPublication,
+          dataController: sanitySettings.dataController || settings.dataController,
+          siret: sanitySettings.siret || settings.siret,
+        };
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch site settings in mentions-legales:", error);
+  }
+
   return (
     <>
       <section className="bg-primary-400 py-10">
@@ -22,11 +51,12 @@ export default function MentionsLegales() {
             <h2 className="text-lg font-bold text-gray-800 mb-3">Présentation du site</h2>
             <p>
               Le site <strong>www.enemicrostation.fr</strong> est édité par la société <strong>ENE SAS</strong>,
-              domiciliée à l&apos;adresse suivante : 10 avenue des Fédérés à Sancoins (18600).
+              domiciliée à l&apos;adresse suivante : {settings.address}.
             </p>
-            <p className="mt-2">Téléphone : 02 48 76 02 84</p>
-            <p>Adresse e-mail : contact@ene-sas.fr</p>
-            <p className="mt-2">Le directeur de publication du site est : <strong>Frédéric CROSNIER</strong>.</p>
+            <p className="mt-2">Téléphone : {settings.phone}</p>
+            <p>Adresse e-mail : {settings.email}</p>
+            {settings.siret && <p className="mt-1">N° SIRET : {settings.siret}</p>}
+            <p className="mt-2">Le directeur de publication du site est : <strong>{settings.dirPublication}</strong>.</p>
             <p className="mt-2">
               Le site est hébergé par <strong>Vercel Inc.</strong>, 440 N Barranca Ave #4133, Covina, CA 91723, USA.
             </p>
@@ -36,8 +66,8 @@ export default function MentionsLegales() {
             <h2 className="text-lg font-bold text-gray-800 mb-3">Contact</h2>
             <p>
               Pour toute question ou demande d&apos;information concernant le site, ou tout signalement de contenu
-              ou d&apos;activités illicites, l&apos;utilisateur peut contacter l&apos;éditeur à l&apos;adresse e-mail suivante :
-              contact@ene-sas.fr.
+              ou d&apos;activités illicites, l&apos;utilisateur peut contacter l&apos;éditeur à l&apos;adresse e-mail suivante :{" "}
+              <a href={`mailto:${settings.email}`} className="hover:underline">{settings.email}</a>.
             </p>
           </div>
 
@@ -127,8 +157,8 @@ export default function MentionsLegales() {
 
             <h3 className="font-semibold text-gray-700 mt-4 mb-2">3. Responsable du traitement</h3>
             <p>
-              Le responsable du traitement des données à caractère personnel est <strong>Michel PENARD</strong>.
-              Contact : contact@ene-sas.fr
+              Le responsable du traitement des données à caractère personnel est <strong>{settings.dataController}</strong>.
+              Contact : {settings.email}
             </p>
 
             <h3 className="font-semibold text-gray-700 mt-4 mb-2">4. Droits de l&apos;utilisateur</h3>

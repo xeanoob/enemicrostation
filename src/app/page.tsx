@@ -5,6 +5,9 @@ import Solutions from "@/components/sections/Solutions";
 import WhyUs from "@/components/sections/WhyUs";
 import Process from "@/components/sections/Process";
 import CTA from "@/components/sections/CTA";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
+import { urlFor } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "ENE SAS - Micro-Station d'Épuration & Assainissement Non Collectif à Sancoins (18)",
@@ -12,16 +15,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://enemicrostation.fr" },
 };
 
-import { isSanityConfigured } from "@/sanity/lib/client";
-import { getSanityClient } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
-
 export default async function Home() {
-  let heroData = { title: "ENE SAS", subtitle: "Énergies Nouvelles Environnement" };
+  let heroData: any = {
+    title: "ENE SAS",
+    subtitle: "Énergies Nouvelles Environnement",
+    bg: "/images/hero-bg.jpeg",
+    desc1: "Spécialiste en assainissement depuis 2006",
+    desc2: "Conseils, étude, livraison, mise en route, installation, SAV, entretien et maintenance",
+    tags: "Micro-stations d'épuration Tricel • Filtres compacts • Pompes de relevage • Eau de pluie",
+  };
   let productsList: any[] = [];
   let whyUsData: any = null;
   let processData: any = null;
-  let phone: string | undefined = undefined;
+  let phone = "02 48 76 02 84";
+  let statsData: any[] | null = null;
+  let ctaData: any = null;
 
   try {
     const sanityClient = await getSanityClient();
@@ -30,9 +38,22 @@ export default async function Home() {
       const homepageData = await sanityClient.fetch(`*[_type == "homepage"][0]`);
       if (homepageData) {
         heroData = {
-          title: homepageData.title || "ENE SAS",
-          subtitle: homepageData.subtitle || "Énergies Nouvelles Environnement"
+          title: homepageData.title || heroData.title,
+          subtitle: homepageData.subtitle || heroData.subtitle,
+          bg: homepageData.heroBg ? urlFor(homepageData.heroBg).url() : heroData.bg,
+          desc1: homepageData.heroDesc1 || heroData.desc1,
+          desc2: homepageData.heroDesc2 || heroData.desc2,
+          tags: homepageData.heroTags || heroData.tags,
         };
+        statsData = homepageData.stats || null;
+        if (homepageData.ctaTitle) {
+          ctaData = {
+            title: homepageData.ctaTitle,
+            text1: homepageData.ctaText1,
+            text2: homepageData.ctaText2,
+            image: homepageData.ctaImage ? urlFor(homepageData.ctaImage).url() : undefined,
+          };
+        }
       }
 
       // Fetch products list
@@ -74,7 +95,7 @@ export default async function Home() {
       // Fetch site settings for phone
       const sanitySettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (sanitySettings) {
-        phone = sanitySettings.phone;
+        phone = sanitySettings.phone || phone;
       }
     }
   } catch (error) {
@@ -83,8 +104,16 @@ export default async function Home() {
 
   return (
     <>
-      <Hero title={heroData.title} subtitle={heroData.subtitle} />
-      <Certifications />
+      <Hero
+        title={heroData.title}
+        subtitle={heroData.subtitle}
+        bg={heroData.bg}
+        desc1={heroData.desc1}
+        desc2={heroData.desc2}
+        tags={heroData.tags}
+        phone={phone}
+      />
+      <Certifications stats={statsData} />
       <Solutions items={productsList} />
       <Process 
         title={processData?.title} 
@@ -98,7 +127,13 @@ export default async function Home() {
         subtitle={whyUsData?.subtitle} 
         items={whyUsData?.engagements} 
       />
-      <CTA />
+      <CTA
+        title={ctaData?.title}
+        text1={ctaData?.text1}
+        text2={ctaData?.text2}
+        image={ctaData?.image}
+        phone={phone}
+      />
     </>
   );
 }
