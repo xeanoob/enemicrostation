@@ -116,20 +116,38 @@ export default function EauDePluiePage() {
         </div>
       </section>
 
-      {/* Vidéo */}
+      {/* Vidéos */}
       <section className="py-10 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Présentation vidéo</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="relative w-full aspect-video bg-black">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
-              title="ENE SAS - Récupération eau de pluie"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-              className="absolute inset-0 w-full h-full"
-            />
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Présentations vidéos</h2>
+          <div className="w-16 h-1 bg-primary-400 mb-8" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-bold text-gray-800 text-sm sm:text-base mb-3 font-sans">Plasteau lance une gamme de cuve gros volume</h3>
+              <div className="relative w-full aspect-video bg-black">
+                <iframe
+                  src="https://www.dailymotion.com/embed/video/x3obmxj?ui-highlight=0&amp;endscreen-enable=0&amp;controls=1&amp;mute=0"
+                  title="Dailymotion - Récupérateur d'eau de pluie Plasteau"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-800 text-sm sm:text-base mb-3 font-sans">Ecoslim cuve de récupération des eaux de pluies</h3>
+              <div className="relative w-full aspect-video bg-black">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/h5JPQiDiutA"
+                  title="Tricel - Cuve Ecoslim récupération des eaux pluviales"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>

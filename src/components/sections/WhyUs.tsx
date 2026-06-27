@@ -8,17 +8,17 @@ const services = [
   {
     title: "Livraison",
     desc: "Livraison par nos techniciens spécialisés dans les départements 18, 58, 03, 36, 23, 63, 15, 43, 45, 41.",
-    image: "/images/livraison.jpg",
+    image: "/images/livraison2.jpg",
   },
   {
     title: "Mise en route",
     desc: "Installation et mise en service par nos équipes qualifiées, préservant la garantie fabricant de 20 ans pour la cuve.",
-    image: "/images/livraison-2.jpg",
+    image: "/images/miseenroute.jpg",
   },
   {
     title: "Entretien / SAV / Maintenance",
     desc: "Contrat de service pour le suivi et la maintenance de votre installation. Intervention rapide en cas de besoin.",
-    image: "/images/chantier-3.jpeg",
+    image: "/images/entretien.jpeg",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function WhyUs() {
               transition={{ duration: 0.4, delay: 0.1 * i }}
               className="bg-white border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
             >
-              <div className="relative h-44">
+              <div className="relative aspect-[4/3] sm:aspect-[3/4] w-full bg-gray-100">
                 <Image
                   src={s.image}
                   alt={s.title}

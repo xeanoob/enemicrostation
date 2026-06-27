@@ -23,7 +23,7 @@ export default function Process() {
             </h2>
             <div className="w-16 h-1 bg-primary-400 mb-6" />
             <p className="text-gray-600 leading-relaxed mb-4">
-              Basés dans le sud du département du Cher, au confins de 3 régions,
+              Basés dans le sud du département du Cher, aux confins de 3 régions,
               nous sommes spécialisés dans le domaine des micro-stations d&apos;épuration,
               des filtres compacts, solutions d&apos;assainissement sans odeurs, de faible encombrement.
             </p>
@@ -52,12 +52,12 @@ export default function Process() {
 
 
             <Image
-              src="/images/camion-ene.jpg"
-              alt="Camion ENE SAS sur la route"
-              width={565}
-              height={343}
-              sizes="(max-width: 768px) 100vw, 565px"
-              className="w-full h-auto border border-gray-200"
+              src="/images/departement.jpeg"
+              alt="Carte des départements d'intervention de ENE SAS"
+              width={433}
+              height={576}
+              sizes="(max-width: 768px) 100vw, 300px"
+              className="w-full h-auto max-w-[300px] mx-auto"
               quality={85}
             />
           </motion.div>

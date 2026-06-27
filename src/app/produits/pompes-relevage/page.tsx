@@ -87,23 +87,6 @@ export default function PompesPage() {
         </div>
       </section>
 
-      {/* Vidéo */}
-      <section className="py-10 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Présentation du fonctionnement</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="relative w-full aspect-video bg-black">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
-              title="ENE SAS - Pompes de relevage"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Documentation */}
       <section className="py-10 sm:py-16 bg-gray-50">

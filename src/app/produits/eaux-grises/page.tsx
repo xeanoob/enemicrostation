@@ -30,20 +30,23 @@ export default function EauxGrisesPage() {
           </ul>
           <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
             Le principe est de récupérer les eaux provenant des douches, baignoires, lavabos…
-            Les eaux passent par un premier <strong>dégrilleur</strong> afin de récupérer cheveux et autres résidus,
-            puis par une <strong>filtration membranaire</strong> ainsi qu&apos;un traitement chloré si besoin.
+            Les eaux passent par un premier <strong>dégrilleur</strong>{" "}afin de récupérer cheveux et autres résidus,
+            puis par une <strong>filtration membranaire</strong>{" "}ainsi qu&apos;un traitement chloré si besoin.
             Les eaux filtrées et traitées sont ensuite stockées pour être réutilisées.
           </p>
 
-          <Image
-            src="/images/eaux-grises-schema.jpg"
-            alt="Schéma traitement des eaux grises"
-            width={768}
-            height={543}
-            className="w-full h-auto border border-gray-200 mt-4"
-            quality={85}
-          />
-          <p className="text-xs text-gray-500 mt-2 italic mb-4">Schéma de traitement des eaux grises</p>
+          <div className="flex flex-col items-center mt-4">
+            <Image
+              src="/images/eaux-grises-schema.jpg"
+              alt="Schéma de traitement des eaux grises"
+              width={768}
+              height={543}
+              sizes="(max-width: 768px) 100vw, 650px"
+              className="w-full h-auto max-w-[650px] border border-gray-200 shadow-sm"
+              quality={90}
+            />
+            <p className="text-xs text-gray-500 mt-2 italic mb-4">Schéma de traitement des eaux grises</p>
+          </div>
         </div>
       </section>
 
@@ -73,14 +76,6 @@ export default function EauxGrisesPage() {
         </div>
       </section>
 
-      <section className="py-10 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-lg font-bold text-gray-800 mb-2">Chaque projet est unique</p>
-          <p className="text-sm text-gray-500 mb-6">
-            Appelez-nous pour une étude personnalisée et un devis adapté à votre situation.
-          </p>
-        </div>
-      </section>
 
       <section className="py-10 bg-primary-400">
         <div className="max-w-4xl mx-auto px-4 text-center">

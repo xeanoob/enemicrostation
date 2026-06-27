@@ -6,7 +6,7 @@ import { Award, Users, UserCheck, Truck } from "lucide-react";
 
 const stats = [
   { number: "20", label: "Ans d'expérience", icon: Award },
-  { number: "4000", label: "Plus de 4000 clients", icon: Users },
+  { number: "4000", label: "Clients", icon: Users },
   { number: "7", label: "Collaborateurs", icon: UserCheck },
   { number: "8", label: "Véhicules dédiés", icon: Truck },
 ];

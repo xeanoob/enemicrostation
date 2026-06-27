@@ -34,7 +34,10 @@ export default function FiltreCompactPage() {
               </p>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
                 Le filtre compact <strong>ne nécessite aucune énergie</strong> pour le traitement des eaux usées
-                en modèle Sortie basse. En modèle Sortie haute, une pompe de relevage assure
+                en modèle Sortie basse.
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
+                En modèle Sortie haute, une pompe de relevage assure
                 l&apos;évacuation des eaux traitées.
               </p>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -113,29 +116,12 @@ export default function FiltreCompactPage() {
             {[
               { src: "/images/filtre-1.jpg", alt: "Installation filtre compact Tricel Filtro" },
               { src: "/images/filtre-2.jpg", alt: "Chantier filtre compact Tricel Filtro" },
-              { src: "/images/fossactiver.jpg", alt: "Produit Foss'Activer" },
+              { src: "/images/filtrecompact.jpeg", alt: "Filtre compact Tricel Filtro" },
             ].map((img) => (
               <div key={img.src} className="relative aspect-square overflow-hidden border border-gray-200">
                 <Image src={img.src} alt={img.alt} fill className="object-cover" quality={75} />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-      {/* Vidéo */}
-      <section className="py-10 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Présentation vidéo</h2>
-          <div className="w-16 h-1 bg-primary-400 mb-6" />
-          <div className="relative w-full aspect-video bg-black">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/RDHj1cGnVqE"
-              title="ENE SAS - Filtre compact Tricel Filtro"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-              className="absolute inset-0 w-full h-full"
-            />
           </div>
         </div>
       </section>
@@ -152,8 +138,8 @@ export default function FiltreCompactPage() {
                 <FileText size={24} className="text-red-500" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-bold text-gray-800 text-sm">Brochure Tricel Filtro</p>
-                <p className="text-xs text-gray-500">Filtre compact Tricel Filtro</p>
+                <p className="font-bold text-gray-800 text-sm">Brochure Tricel Filtro 18 EH</p>
+                <p className="text-xs text-gray-500">Filtre compact Tricel Filtro 18 EH</p>
               </div>
               <Download size={18} className="text-gray-500 shrink-0" />
             </a>
@@ -163,8 +149,8 @@ export default function FiltreCompactPage() {
                 <FileText size={24} className="text-red-500" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-bold text-gray-800 text-sm">Brochure Tricel Filtro 18</p>
-                <p className="text-xs text-gray-500">Filtre compact Tricel Filtro 18 EH</p>
+                <p className="font-bold text-gray-800 text-sm">Brochure Tricel Filtro 21 EH</p>
+                <p className="text-xs text-gray-500">Filtre compact Tricel Filtro 21 EH</p>
               </div>
               <Download size={18} className="text-gray-500 shrink-0" />
             </a>

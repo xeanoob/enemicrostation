@@ -5,16 +5,6 @@ import { Phone, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "RFC Travaux Publics et Privés",
-    role: "Installateur professionnel",
-    instagramId: "DYEjNawMOBL",
-    text: `Installation Fosse Septique : Filtre Compact 15 EH — le plus grand filtre compact mono cuve posé par l'entreprise RFC Travaux Publics et Privés à ce jour.
-
-Chez RFC Travaux Publics et Privés, ils s'occupent de tout : étude et préparation du projet, dossiers et démarches SPANC, terrassement et installation, raccordements, et remise en état complète du terrain.
-
-Un accompagnement du début jusqu'à la fin, avec sérieux et professionnalisme.`,
-  },
-  {
     name: "Jean DELEUME",
     role: "Maire de Mars-sur-Allier (58)",
     videoId: "qjX93px88CI?si=QQQCnvHmIul9HJwJ",
@@ -43,6 +33,11 @@ Selon le maire, les micro-stations d'épuration sont l'avenir de l'assainissemen
 Depuis 2011, il est possible en France d'installer des micro-stations agréées, notamment la Tricel Novo 6 EH (Équivalent-Habitants) pour 4 à 6 habitants.
 
 Aujourd'hui, la Tricel Novo est le produit le plus performant selon M. Duguet car elle est très fiable (aucune incidence sur la maintenance et le suivi de la clientèle). Facile à installer puisqu'elle peut être posée en une seule journée : terrassement, pose et installation client compris.`,
+  },
+  {
+    name: "RFC Travaux Publics et Privés",
+    role: "Installateur professionnel",
+    instagramId: "DYEjNawMOBL",
   },
 ];
 
@@ -77,13 +72,13 @@ export default function TemoignagesPage() {
                 </div>
               )}
               {"instagramId" in t && t.instagramId && (
-                <div className="w-full bg-white flex flex-col items-center">
+                <div className="w-full bg-gray-50 flex flex-col items-center py-6 border-b border-gray-200">
                   <iframe
-                    src={`https://www.instagram.com/p/${t.instagramId}/embed/captioned`}
+                    src={`https://www.instagram.com/reel/${t.instagramId}/embed/`}
                     title={`Témoignage ${t.name}`}
                     loading="lazy"
-                    className="w-full border-0"
-                    style={{ minHeight: "500px", maxWidth: "100%" }}
+                    className="border border-gray-200 rounded-xl shadow-md bg-white w-full max-w-[400px]"
+                    style={{ height: "600px" }}
                     allowFullScreen
                     scrolling="no"
                   />
@@ -99,7 +94,7 @@ export default function TemoignagesPage() {
                     <p className="text-xs text-primary-400 font-medium">{t.role}</p>
                   </div>
                 </div>
-                {t.text.split("\n\n").map((para, i) => (
+                {t.text && t.text.split("\n\n").map((para, i) => (
                   <p key={i} className="text-sm text-gray-600 leading-relaxed mb-3 last:mb-0">
                     {para}
                   </p>

@@ -16,20 +16,26 @@ const solutions = [
   {
     title: "Filtre compact",
     desc: "Traitement des eaux usées domestiques avec un média filtrant naturel. Faible encombrement et peu d'énergie nécessaire.",
-    href: "/produits#filtres",
-    image: "/images/fossactiver.jpg",
+    href: "/produits/filtre-compact",
+    image: "/images/filtrecompact.jpeg",
   },
   {
     title: "Pompes de relevage",
     desc: "Postes et pompes de relevage pour l'évacuation des eaux usées et pluviales, adaptés à toutes configurations.",
-    href: "/produits#pompes",
+    href: "/produits/pompes-relevage",
     image: "/images/installation.jpg",
   },
   {
     title: "Réutilisation eau de pluie",
     desc: "Systèmes de stockage et de valorisation de l'eau de pluie pour réduire votre consommation d'eau potable.",
-    href: "/produits#eau-pluie",
+    href: "/produits/eau-de-pluie",
     image: "/images/eau-pluie.jpeg",
+  },
+  {
+    title: "Traitement des eaux grises",
+    desc: "Solutions de recyclage des eaux grises pour un usage responsable et économique de l'eau dans votre habitat.",
+    href: "/produits/eaux-grises",
+    image: "/images/eaux-grises.jpg",
   },
 ];
 
@@ -56,16 +62,17 @@ export default function Solutions() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {solutions.map((sol, i) => (
             <motion.div
               key={sol.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 * i }}
+              className="h-full"
             >
-              <Link href={sol.href} className="group block bg-white border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
-                <div className="relative h-44 overflow-hidden">
+              <Link href={sol.href} className="group flex flex-col h-full bg-white border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
+                <div className="relative h-44 overflow-hidden shrink-0">
                   <Image
                     src={sol.image}
                     alt={sol.title}
@@ -74,10 +81,10 @@ export default function Solutions() {
                     quality={75}
                   />
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex-1 flex flex-col">
                   <h3 className="font-bold text-gray-800 mb-2 text-sm">{sol.title}</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-3">{sol.desc}</p>
-                  <span className="text-xs font-semibold text-primary-400 flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <p className="text-xs text-gray-500 leading-relaxed mb-4 flex-1">{sol.desc}</p>
+                  <span className="text-xs font-semibold text-primary-400 flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
                     En savoir plus <ArrowRight size={14} />
                   </span>
                 </div>
