@@ -24,9 +24,16 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  phone = "02 48 76 02 84",
+  email = "contact@ene-sas.fr",
+}: {
+  phone?: string;
+  email?: string;
+}) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const cleanPhone = phone.replace(/\s+/g, "");
 
   return (
     <header className="sticky top-0 z-50">
@@ -47,13 +54,13 @@ export default function Navbar() {
 
           {/* Desktop contact info */}
           <div className="hidden md:flex items-center gap-6 text-sm">
-            <a href="tel:0248760284" className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
+            <a href={`tel:${cleanPhone}`} className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
               <Phone size={16} className="text-primary-400" />
-              02 48 76 02 84
+              {phone}
             </a>
-            <a href="mailto:contact@ene-sas.fr" className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
+            <a href={`mailto:${email}`} className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
               <Mail size={16} className="text-primary-400" />
-              contact@ene-sas.fr
+              {email}
             </a>
             <Link href="/contact" className="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white text-sm font-semibold transition-colors">
               NOUS CONTACTER
@@ -167,11 +174,11 @@ export default function Navbar() {
 
               {/* Mobile contact info */}
               <div className="mt-6 space-y-3">
-                <a href="tel:0248760284" className="flex items-center gap-3 p-4 bg-primary-400 text-white font-semibold text-sm">
-                  <Phone size={18} /> 02 48 76 02 84
+                <a href={`tel:${cleanPhone}`} className="flex items-center gap-3 p-4 bg-primary-400 text-white font-semibold text-sm">
+                  <Phone size={18} /> {phone}
                 </a>
-                <a href="mailto:contact@ene-sas.fr" className="flex items-center gap-3 p-4 bg-gray-100 text-gray-700 text-sm">
-                  <Mail size={18} className="text-primary-400" /> contact@ene-sas.fr
+                <a href={`mailto:${email}`} className="flex items-center gap-3 p-4 bg-gray-100 text-gray-700 text-sm">
+                  <Mail size={18} className="text-primary-400" /> {email}
                 </a>
                 <Link
                   href="/contact"

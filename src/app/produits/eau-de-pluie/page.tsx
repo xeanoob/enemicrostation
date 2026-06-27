@@ -1,16 +1,53 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, Download } from "lucide-react";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function EauDePluiePage() {
+export default async function EauDePluiePage() {
+  let title = "Réutilisation d'eau de pluie";
+  let subtitle = "Économisez plus de 50% de votre facture d'eau potable";
+  let introTitle = "Pourquoi récupérer l'eau de pluie ?";
+  let introText1 = "Plus de 50% de nos besoins domestiques n'ont pas besoin d'eau potable : l'arrosage du jardin, les chasses d'eau, le lavage de voiture, des sols, l'appoint de piscine… L'eau de pluie peut servir à toutes ces tâches à condition qu'elle ait été correctement filtrée et stockée.";
+  let introText2 = "Par soucis d'économie — l'eau étant de plus en plus chère — ou d'écologie — inutile de prendre de l'eau potable pour les WC — bon nombre de pays voisins valorisent l'eau de pluie depuis de très nombreuses années.";
+  let introText3 = "Installer un système de récupération d'eau de pluie donne une <strong>valeur durable</strong> à votre habitation. Cette eau est gratuite et non calcaire.";
+  let schemaImage = "/images/eau-pluie-schema.jpg";
+  let phone = "02 48 76 02 84";
+
+  try {
+    if (isSanityConfigured) {
+      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "eau-de-pluie"][0]`);
+      if (pageData) {
+        title = pageData.title || title;
+        subtitle = pageData.subtitle || subtitle;
+        introTitle = pageData.introTitle || introTitle;
+        if (pageData.introText) {
+          introText1 = pageData.introText;
+          introText2 = "";
+          introText3 = "";
+        }
+        if (pageData.schemaImage) {
+          schemaImage = urlFor(pageData.schemaImage).url();
+        }
+      }
+
+      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (settingsData) {
+        phone = settingsData.phone || phone;
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch product page from Sanity:", error);
+  }
+
+  const cleanPhone = phone.replace(/\s+/g, "");
+
   return (
     <>
       <section className="bg-primary-400 py-10">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Réutilisation d&apos;eau de pluie</h1>
-          <p className="text-white/80 mt-2 text-sm sm:text-base">Économisez plus de 50% de votre facture d&apos;eau potable</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">{title}</h1>
+          <p className="text-white/80 mt-2 text-sm sm:text-base">{subtitle}</p>
         </div>
       </section>
 
@@ -18,28 +55,16 @@ export default function EauDePluiePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">Pourquoi récupérer l&apos;eau de pluie ?</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">{introTitle}</h2>
               <div className="w-16 h-1 bg-primary-400 mb-5" />
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Plus de 50% de nos besoins domestiques n&apos;ont pas besoin d&apos;eau potable :
-                l&apos;arrosage du jardin, les chasses d&apos;eau, le lavage de voiture, des sols,
-                l&apos;appoint de piscine… L&apos;eau de pluie peut servir à toutes ces tâches à condition
-                qu&apos;elle ait été correctement filtrée et stockée.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Par soucis d&apos;économie — l&apos;eau étant de plus en plus chère — ou d&apos;écologie —
-                inutile de prendre de l&apos;eau potable pour les WC — bon nombre de pays voisins
-                valorisent l&apos;eau de pluie depuis de très nombreuses années.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                Installer un système de récupération d&apos;eau de pluie donne une <strong>valeur durable</strong> à votre habitation.
-                Cette eau est gratuite et non calcaire.
-              </p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText1 }} />
+              {introText2 && <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText2 }} />}
+              {introText3 && <p className="text-sm sm:text-base text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: introText3 }} />}
             </div>
             <div>
               <Image
-                src="/images/eau-pluie-schema.jpg"
-                alt="Schéma de récupération d'eau de pluie"
+                src={schemaImage}
+                alt="Schéma de récupération"
                 width={600}
                 height={400}
                 className="w-full h-auto border border-gray-200"
@@ -187,8 +212,8 @@ export default function EauDePluiePage() {
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis
             </Link>
-            <a href="tel:0248760284" className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
-              <Phone size={16} /> 02 48 76 02 84
+            <a href={`tel:${cleanPhone}`} className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
+              <Phone size={16} /> {phone}
             </a>
           </div>
         </div>

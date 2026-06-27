@@ -4,7 +4,13 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const services = [
+interface ServiceItem {
+  title: string;
+  desc: string;
+  image: string;
+}
+
+const defaultServices = [
   {
     title: "Livraison",
     desc: "Livraison par nos techniciens spécialisés dans les départements 18, 58, 03, 36, 23, 63, 15, 43, 45, 41.",
@@ -22,7 +28,16 @@ const services = [
   },
 ];
 
-export default function WhyUs() {
+export default function WhyUs({
+  title = "Nos services",
+  subtitle = "De la première étude à l'entretien régulier, nous vous accompagnons à chaque étape.",
+  items,
+}: {
+  title?: string;
+  subtitle?: string;
+  items?: ServiceItem[];
+}) {
+  const services = items && items.length > 0 ? items : defaultServices;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -36,11 +51,11 @@ export default function WhyUs() {
           className="mb-10"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-            Nos services
+            {title}
           </h2>
           <div className="w-16 h-1 bg-primary-400 mb-4" />
           <p className="text-gray-500 text-sm sm:text-base max-w-2xl">
-            De la première étude à l&apos;entretien régulier, nous vous accompagnons à chaque étape.
+            {subtitle}
           </p>
         </motion.div>
 

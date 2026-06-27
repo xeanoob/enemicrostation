@@ -2,7 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
-export default function Footer() {
+export default function Footer({
+  phone = "02 48 76 02 84",
+  email = "contact@ene-sas.fr",
+  address = "10 avenue des Fédérés, 18600 SANCOINS",
+  hours = "Lun-Jeu : 8h-12h / 13h-17h30\nVen : 8h-12h",
+}: {
+  phone?: string;
+  email?: string;
+  address?: string;
+  hours?: string;
+}) {
+  const cleanPhone = phone.replace(/\s+/g, "");
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 py-14">
@@ -55,19 +66,19 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-primary-400 shrink-0 mt-0.5" />
-                10 avenue des Fédérés, 18600 SANCOINS
+                {address}
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} className="text-primary-400 shrink-0" />
-                <a href="tel:0248760284" className="hover:text-white transition-colors">02 48 76 02 84</a>
+                <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors">{phone}</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-primary-400 shrink-0" />
-                <a href="mailto:contact@ene-sas.fr" className="hover:text-white transition-colors">contact@ene-sas.fr</a>
+                <a href={`mailto:${email}`} className="hover:text-white transition-colors">{email}</a>
               </li>
               <li className="flex items-start gap-2">
                 <Clock size={16} className="text-primary-400 shrink-0 mt-0.5" />
-                <span>Lun-Jeu : 8h-12h / 13h-17h30<br />Ven : 8h-12h</span>
+                <span style={{ whiteSpace: "pre-line" }}>{hours}</span>
               </li>
             </ul>
           </div>

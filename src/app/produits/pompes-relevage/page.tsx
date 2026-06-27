@@ -1,16 +1,53 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, Download } from "lucide-react";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function PompesPage() {
+export default async function PompesPage() {
+  let title = "Pompes et postes de relevage";
+  let subtitle = "Solutions de relevage adaptées à tous les besoins";
+  let introTitle = "Le fonctionnement";
+  let introText = "Les postes ou pompes de relevage servent à refouler les eaux au cas où l&apos;habitation ou l&apos;immeuble soit plus bas que le réseau d&apos;eaux usées ou pluviales. Composé d&apos;une cuve et d&apos;une ou plusieurs pompes, les eaux entrantes seront refoulées vers le réseau, grâce au déclenchement d&apos;un flotteur de niveau qui actionnera automatiquement la pompe. En fonction de la hauteur et de la distance, la très large gamme de pompes ou de postes de relevage est étudiée pour tous les besoins :";
+  let benefits = ["Pour le particulier", "Pour les professionnels", "Pour les collectivités ou industries"];
+  let detailsText = "Dans tous les cas, nous en assurons l&apos;étude, la livraison et si besoin la mise en route, l&apos;entretien et le SAV.";
+  let schemaImage = "/images/installation.jpg";
+  let phone = "02 48 76 02 84";
+
+  try {
+    if (isSanityConfigured) {
+      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "pompes-relevage"][0]`);
+      if (pageData) {
+        title = pageData.title || title;
+        subtitle = pageData.subtitle || subtitle;
+        introTitle = pageData.introTitle || introTitle;
+        introText = pageData.introText || introText;
+        if (pageData.benefits && pageData.benefits.length > 0) {
+          benefits = pageData.benefits;
+        }
+        detailsText = pageData.detailsText || detailsText;
+        if (pageData.schemaImage) {
+          schemaImage = urlFor(pageData.schemaImage).url();
+        }
+      }
+
+      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (settingsData) {
+        phone = settingsData.phone || phone;
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch product page from Sanity:", error);
+  }
+
+  const cleanPhone = phone.replace(/\s+/g, "");
+
   return (
     <>
       <section className="bg-primary-400 py-10">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Pompes et postes de relevage</h1>
-          <p className="text-white/80 mt-2 text-sm sm:text-base">Solutions de relevage adaptées à tous les besoins</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">{title}</h1>
+          <p className="text-white/80 mt-2 text-sm sm:text-base">{subtitle}</p>
         </div>
       </section>
 
@@ -18,30 +55,16 @@ export default function PompesPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">Le fonctionnement</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">{introTitle}</h2>
               <div className="w-16 h-1 bg-primary-400 mb-5" />
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Les postes ou pompes de relevage servent à refouler les eaux au cas où l&apos;habitation
-                ou l&apos;immeuble soit plus bas que le réseau d&apos;eaux usées ou pluviales.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Composé d&apos;une cuve et d&apos;une ou plusieurs pompes, les eaux entrantes seront refoulées
-                vers le réseau, grâce au déclenchement d&apos;un <strong>flotteur de niveau</strong> qui actionnera
-                automatiquement la pompe.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                En fonction de la hauteur et de la distance, la très large gamme de pompes ou de postes
-                de relevage est étudiée pour tous les besoins :
-              </p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText }} />
+              
               <ul className="text-sm sm:text-base text-gray-600 list-disc list-inside space-y-1 mb-6">
-                <li>Pour le particulier</li>
-                <li>Pour les professionnels</li>
-                <li>Pour les collectivités ou industries</li>
+                {benefits.map((b, i) => (
+                  <li key={i} dangerouslySetInnerHTML={{ __html: b }} />
+                ))}
               </ul>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Dans tous les cas, nous en assurons l&apos;étude, la livraison et si besoin la mise en route,
-                l&apos;entretien et le SAV.
-              </p>
+              <p className="text-sm text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: detailsText }} />
             </div>
             <div className="space-y-4">
               <Image
@@ -115,8 +138,8 @@ export default function PompesPage() {
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis
             </Link>
-            <a href="tel:0248760284" className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
-              <Phone size={16} /> 02 48 76 02 84
+            <a href={`tel:${cleanPhone}`} className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
+              <Phone size={16} /> {phone}
             </a>
           </div>
         </div>

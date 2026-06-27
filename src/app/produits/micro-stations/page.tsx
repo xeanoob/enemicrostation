@@ -1,12 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { Zap, Volume2, Eye, Wrench, Leaf, DollarSign, ShieldCheck, Award, Phone, Beaker, Wind, FlaskConical, Download, FileText } from "lucide-react";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-const advantages = [
+const defaultAdvantages = [
   { icon: Zap, label: "Facilité et rapidité d'installation" },
   { icon: Volume2, label: "Solution silencieuse, sans odeur" },
   { icon: Eye, label: "Faible encombrement, impact visuel minime" },
@@ -17,7 +15,7 @@ const advantages = [
   { icon: Award, label: "Agréments ministériels 2011-006 / 2012-003 / 2017-004" },
 ];
 
-const phases = [
+const defaultPhases = [
   { icon: Beaker, num: "1", title: "Décantation primaire", desc: "Les eaux usées entrent dans le compartiment de décantation primaire. Les boues lourdes et matières solides se déposent au fond du bassin. Un chapeau de flottants, principalement constitué de graisses, se forme en surface. Une digestion anaérobie commence alors, qui améliore la qualité des eaux en liquéfiant peu à peu les boues." },
   { icon: Wind, num: "2", title: "Aération / Oxygénation", desc: "Le bassin d'aération est équipé de supports bactériens en nid d'abeille spécialement conçus pour qu'une multitude de bactéries s'y développe naturellement. Les bactéries sont continuellement alimentées en oxygène grâce à un compresseur situé au sommet de la cuve. Les bactéries se nourrissent des impuretés et les éliminent des effluents." },
   { icon: FlaskConical, num: "3", title: "Clarification / Décantation finale", desc: "Les boues résiduelles se déposent au fond du bassin de décantation finale, où un système de recirculation basé sur un principe d'airlift les renvoie dans le premier bassin. Les effluents traités répondent aux normes en vigueur et peuvent être évacués vers l'exutoire (infiltration dans le sol, rejet dans le milieu hydraulique superficiel)." },
@@ -32,11 +30,58 @@ const tanks = [
   { src: "/images/Tank-6.png.webp.png.webp", label: "Tricel FR20 18-20EH 10000 Litres" },
 ];
 
-export default function MicroStationsPage() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const advRef = useRef(null);
-  const advInView = useInView(advRef, { once: true });
+export default async function MicroStationsPage() {
+  let title = "Micro-station d'épuration Tricel Novo";
+  let subtitle = "Compacte, simple, robuste et fiable. Fabrication 100% française.";
+  let introTitle = "Concessionnaires exclusifs Tricel";
+  let introText1 = "Nous sommes concessionnaires exclusifs du fabricant de micro-station <strong>TRICEL</strong> qui conçoit des solutions de traitement des eaux usées compactes, simples, robustes et fiables. Les usines de production sont basées en France à <strong>Poitiers (86)</strong> et <strong>Sorgues (84)</strong>.";
+  let introText2 = "Vous n'avez pas de place pour votre assainissement ? Vous souhaitez garder votre jardin en état ? La micro-station est votre solution. Pour votre résidence principale, elle remplace la fosse septique ou toutes eaux et le champ d'épandage (environ 30m²), ainsi que le bac dégraisseur.";
+  let introText3 = "La <strong>FR6/4000</strong>, prévue de 1 à 4 chambres (jusqu'à 6 habitants permanents), s'installe sur seulement <strong>5m² au sol</strong> avec du matériel de moins de 3 tonnes. Rapide à poser et à raccorder, la micro-station Tricel vous garantit un rendement épuratoire élevé.";
+  let introText4 = "Nos techniciens s'occupent de la livraison et de la mise en route afin de garder la <strong>garantie fabricant de 20 ans pour la cuve</strong> et de 2 ans pour les autres éléments.";
+  let schemaImage = "/images/micro-station.jpg";
+  let phone = "02 48 76 02 84";
+  let benefits = defaultAdvantages.map(a => a.label);
+
+  try {
+    if (isSanityConfigured) {
+      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "micro-stations"][0]`);
+      if (pageData) {
+        title = pageData.title || title;
+        subtitle = pageData.subtitle || subtitle;
+        introTitle = pageData.introTitle || introTitle;
+        if (pageData.introText) {
+          introText1 = pageData.introText;
+          introText2 = "";
+          introText3 = "";
+          introText4 = "";
+        }
+        if (pageData.benefits && pageData.benefits.length > 0) {
+          benefits = pageData.benefits;
+        }
+        if (pageData.schemaImage) {
+          schemaImage = urlFor(pageData.schemaImage).url();
+        }
+      }
+
+      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (settingsData) {
+        phone = settingsData.phone || phone;
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch product page from Sanity:", error);
+  }
+
+  const cleanPhone = phone.replace(/\s+/g, "");
+
+  // Map icons dynamically for display
+  const finalAdvantages = benefits.map((bLabel) => {
+    const matched = defaultAdvantages.find(da => da.label === bLabel);
+    return {
+      icon: matched ? matched.icon : ShieldCheck,
+      label: bLabel
+    };
+  });
 
   return (
     <>
@@ -44,8 +89,8 @@ export default function MicroStationsPage() {
       <section className="bg-primary-400 py-10">
         <div className="max-w-6xl mx-auto px-4">
           <p className="text-white/70 text-sm mb-1">Partenaire exclusif Tricel</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Micro-station d&apos;épuration Tricel Novo</h1>
-          <p className="text-white/80 mt-2 text-sm sm:text-base">Compacte, simple, robuste et fiable. Fabrication 100% française.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">{title}</h1>
+          <p className="text-white/80 mt-2 text-sm sm:text-base">{subtitle}</p>
         </div>
       </section>
 
@@ -54,32 +99,19 @@ export default function MicroStationsPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-                Nous sommes concessionnaires exclusifs du fabricant de micro-station <strong>TRICEL</strong> qui conçoit
-                des solutions de traitement des eaux usées compactes, simples, robustes et fiables.
-                Les usines de production sont basées en France à <strong>Poitiers (86)</strong> et <strong>Sorgues (84)</strong>.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-                Vous n&apos;avez pas de place pour votre assainissement ? Vous souhaitez garder votre jardin en état ?
-                La micro-station est votre solution. Pour votre résidence principale, elle remplace la fosse septique
-                ou toutes eaux et le champ d&apos;épandage (environ 30m²), ainsi que le bac dégraisseur.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-                La <strong>FR6/4000</strong>, prévue de 1 à 4 chambres (jusqu&apos;à 6 habitants permanents),
-                s&apos;installe sur seulement <strong>5m² au sol</strong> avec du matériel de moins de 3 tonnes.
-                Rapide à poser et à raccorder, la micro-station Tricel vous garantit un rendement épuratoire élevé.
-              </p>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Nos techniciens s&apos;occupent de la livraison et de la mise en route afin de garder
-                la <strong>garantie fabricant de 20 ans pour la cuve</strong> et de 2 ans pour les autres éléments.
-              </p>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">{introTitle}</h2>
+              <div className="w-16 h-1 bg-primary-400 mb-5" />
+              <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: introText1 }} />
+              {introText2 && <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: introText2 }} />}
+              {introText3 && <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: introText3 }} />}
+              {introText4 && <p className="text-gray-600 leading-relaxed text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: introText4 }} />}
               <p className="text-xs text-gray-500 mt-4">
                 Intervention sur les départements 18 / 58 / 03 / 36 / 23 / 63 / 15 / 43.
               </p>
             </div>
             <div>
               <Image
-                src="/images/micro-station.jpg"
+                src={schemaImage}
                 alt="Schéma micro-station Tricel Novo"
                 width={565}
                 height={343}
@@ -121,7 +153,7 @@ export default function MicroStationsPage() {
       </section>
 
       {/* Fonctionnement */}
-      <section ref={ref} className="py-12 sm:py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Le fonctionnement</h2>
           <div className="w-16 h-1 bg-primary-400 mb-3" />
@@ -133,12 +165,9 @@ export default function MicroStationsPage() {
           </p>
 
           <div className="space-y-4">
-            {phases.map((phase, i) => (
-              <motion.div
+            {defaultPhases.map((phase) => (
+              <div
                 key={phase.num}
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="flex flex-col sm:flex-row gap-4 bg-white border border-gray-200 p-5"
               >
                 <div className="w-12 h-12 bg-primary-400 flex items-center justify-center shrink-0">
@@ -149,7 +178,7 @@ export default function MicroStationsPage() {
                   <h3 className="font-bold text-gray-800 mb-2 text-sm sm:text-base">{phase.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{phase.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -196,22 +225,19 @@ export default function MicroStationsPage() {
       </section>
 
       {/* Avantages */}
-      <section ref={advRef} className="py-12 sm:py-16">
+      <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Les avantages</h2>
           <div className="w-16 h-1 bg-primary-400 mb-8" />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {advantages.map((a, i) => (
-              <motion.div
+            {finalAdvantages.map((a) => (
+              <div
                 key={a.label}
-                initial={{ opacity: 0 }}
-                animate={advInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
                 className="flex items-center gap-3 p-4 bg-gray-50 border border-gray-200"
               >
                 <a.icon size={20} className="text-primary-400 shrink-0" />
                 <span className="text-sm text-gray-700">{a.label}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -262,8 +288,8 @@ export default function MicroStationsPage() {
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis
             </Link>
-            <a href="tel:0248760284" className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
-              <Phone size={16} /> 02 48 76 02 84
+            <a href={`tel:${cleanPhone}`} className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
+              <Phone size={16} /> {phone}
             </a>
           </div>
         </div>

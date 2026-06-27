@@ -146,11 +146,36 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let settings = {
+    phone: "02 48 76 02 84",
+    email: "contact@ene-sas.fr",
+    address: "10 avenue des Fédérés, 18600 SANCOINS",
+    hours: "Lun-Jeu : 8h-12h / 13h-17h30\nVen : 8h-12h",
+  };
+
+  try {
+    if (isSanityConfigured) {
+      const sanitySettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (sanitySettings) {
+        settings = {
+          phone: sanitySettings.phone || settings.phone,
+          email: sanitySettings.email || settings.email,
+          address: sanitySettings.address || settings.address,
+          hours: sanitySettings.hours || settings.hours,
+        };
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch site settings from Sanity, using defaults:", error);
+  }
+
   return (
     <html lang="fr" className={`${inter.variable} h-full antialiased`}>
       <head>
@@ -160,9 +185,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <Navbar phone={settings.phone} email={settings.email} />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer phone={settings.phone} email={settings.email} address={settings.address} hours={settings.hours} />
       </body>
     </html>
   );

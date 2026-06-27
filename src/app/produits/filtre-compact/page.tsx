@@ -1,16 +1,49 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, Download } from "lucide-react";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function FiltreCompactPage() {
+export default async function FiltreCompactPage() {
+  let title = "Le filtre compact Tricel Filtro";
+  let subtitle = "Solution fiable pour le traitement des eaux usées domestiques";
+  let introTitle = "Le fonctionnement";
+  let introText1 = "Le filtre compact Tricel FILTRO permet de traiter efficacement les eaux usées domestiques et assimilées. Il est adapté pour les applications individuelles en utilisation permanente (résidences principales), en utilisation intermittente (résidences secondaires) ainsi que, sous réserve de validation par une étude de filière, pour les hôtels, campings, regroupements d&apos;habitations, etc.";
+  let introText2 = "Le filtre compact Tricel FILTRO est monocuve avec 2 compartiments (sauf le modèle 18 EH) : un compartiment de décantation primaire pour le traitement primaire des eaux usées, et un compartiment massif filtrant pour le traitement secondaire.";
+  let introText3 = "Le filtre compact ne nécessite aucune énergie pour le traitement des eaux usées en modèle Sortie basse. En modèle Sortie haute, une pompe de relevage assure l&apos;évacuation des eaux traitées. La technologie sur laquelle il repose assure aux usagers une fiabilité exceptionnelle et des coûts d&apos;entretien des plus bas.";
+  let phone = "02 48 76 02 84";
+
+  try {
+    if (isSanityConfigured) {
+      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "filtre-compact"][0]`);
+      if (pageData) {
+        title = pageData.title || title;
+        subtitle = pageData.subtitle || subtitle;
+        introTitle = pageData.introTitle || introTitle;
+        if (pageData.introText) {
+          introText1 = pageData.introText;
+          introText2 = "";
+          introText3 = "";
+        }
+      }
+
+      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (settingsData) {
+        phone = settingsData.phone || phone;
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch product page from Sanity:", error);
+  }
+
+  const cleanPhone = phone.replace(/\s+/g, "");
+
   return (
     <>
       <section className="bg-primary-400 py-10">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Le filtre compact Tricel Filtro</h1>
-          <p className="text-white/80 mt-2 text-sm sm:text-base">Solution fiable pour le traitement des eaux usées domestiques</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">{title}</h1>
+          <p className="text-white/80 mt-2 text-sm sm:text-base">{subtitle}</p>
         </div>
       </section>
 
@@ -18,32 +51,11 @@ export default function FiltreCompactPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">Le fonctionnement</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-2">{introTitle}</h2>
               <div className="w-16 h-1 bg-primary-400 mb-5" />
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Le filtre compact Tricel FILTRO permet de traiter efficacement les eaux usées domestiques
-                et assimilées. Il est adapté pour les applications individuelles en utilisation permanente
-                (résidences principales), en utilisation intermittente (résidences secondaires) ainsi que,
-                sous réserve de validation par une étude de filière, pour les hôtels, campings,
-                regroupements d&apos;habitations, etc.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Le filtre compact Tricel FILTRO est <strong>monocuve avec 2 compartiments</strong> (sauf le modèle 18 EH) :
-                un compartiment de décantation primaire pour le traitement primaire des eaux usées,
-                et un compartiment massif filtrant pour le traitement secondaire.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                Le filtre compact <strong>ne nécessite aucune énergie</strong> pour le traitement des eaux usées
-                en modèle Sortie basse.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
-                En modèle Sortie haute, une pompe de relevage assure
-                l&apos;évacuation des eaux traitées.
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                La technologie sur laquelle il repose assure aux usagers une fiabilité exceptionnelle
-                et des coûts d&apos;entretien des plus bas.
-              </p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText1 }} />
+              {introText2 && <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: introText2 }} />}
+              {introText3 && <p className="text-sm sm:text-base text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: introText3 }} />}
             </div>
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-3">Principe de fonctionnement</h3>
@@ -166,8 +178,8 @@ export default function FiltreCompactPage() {
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis
             </Link>
-            <a href="tel:0248760284" className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
-              <Phone size={16} /> 02 48 76 02 84
+            <a href={`tel:${cleanPhone}`} className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
+              <Phone size={16} /> {phone}
             </a>
           </div>
         </div>

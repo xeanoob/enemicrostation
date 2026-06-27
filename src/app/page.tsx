@@ -18,6 +18,9 @@ import { urlFor } from "@/sanity/lib/image";
 export default async function Home() {
   let heroData = { title: "ENE SAS", subtitle: "Énergies Nouvelles Environnement" };
   let productsList: any[] = [];
+  let whyUsData: any = null;
+  let processData: any = null;
+  let phone: string | undefined = undefined;
 
   try {
     if (isSanityConfigured) {
@@ -40,6 +43,37 @@ export default async function Home() {
           image: p.image ? urlFor(p.image).url() : "/images/micro-station.jpg"
         }));
       }
+
+      // Fetch whyUs settings
+      const sanityWhyUs = await client.fetch(`*[_type == "whyUs"][0]`);
+      if (sanityWhyUs) {
+        whyUsData = {
+          title: sanityWhyUs.title,
+          subtitle: sanityWhyUs.subtitle,
+          engagements: sanityWhyUs.engagements?.map((e: any) => ({
+            title: e.title,
+            desc: e.description,
+            image: e.image ? urlFor(e.image).url() : "/images/livraison2.jpg"
+          }))
+        };
+      }
+
+      // Fetch process settings
+      const sanityProcess = await client.fetch(`*[_type == "process"][0]`);
+      if (sanityProcess) {
+        processData = {
+          title: sanityProcess.title,
+          description1: sanityProcess.description1,
+          description2: sanityProcess.description2,
+          infoText: sanityProcess.infoText
+        };
+      }
+
+      // Fetch site settings for phone
+      const sanitySettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+      if (sanitySettings) {
+        phone = sanitySettings.phone;
+      }
     }
   } catch (error) {
     console.warn("Failed to fetch from Sanity, using default values:", error);
@@ -50,8 +84,18 @@ export default async function Home() {
       <Hero title={heroData.title} subtitle={heroData.subtitle} />
       <Certifications />
       <Solutions items={productsList} />
-      <Process />
-      <WhyUs />
+      <Process 
+        title={processData?.title} 
+        description1={processData?.description1} 
+        description2={processData?.description2} 
+        infoText={processData?.infoText} 
+        phone={phone}
+      />
+      <WhyUs 
+        title={whyUsData?.title} 
+        subtitle={whyUsData?.subtitle} 
+        items={whyUsData?.engagements} 
+      />
       <CTA />
     </>
   );
