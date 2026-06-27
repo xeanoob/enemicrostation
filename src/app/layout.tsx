@@ -88,7 +88,7 @@ const jsonLd = {
   foundingDate: "2006",
   numberOfEmployees: "8",
   image: "https://enemicrostation.fr/opengraph-image.png",
-  logo: "https://enemicrostation.fr/images/logo-ene.jpeg",
+  logo: "https://enemicrostation.fr/images/logo-ene.png",
   address: {
     "@type": "PostalAddress",
     streetAddress: "10 avenue des Fédérés",

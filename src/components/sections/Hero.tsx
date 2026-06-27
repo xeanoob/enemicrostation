@@ -9,12 +9,12 @@ export default function Hero() {
   return (
     <section className="relative h-[550px] md:h-[600px]">
       <Image
-        src="/images/hero-bg.webp"
+        src="/images/hero-bg.jpeg"
         alt="Installation de micro-station d'épuration par ENE"
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-[center_90%]"
         quality={85}
       />
       <div className="absolute inset-0 bg-black/50" />

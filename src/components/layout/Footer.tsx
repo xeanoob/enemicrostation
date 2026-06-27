@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <Link href="/">
               <Image
-                src="/images/logo-ene.jpeg"
+                src="/images/logo-ene.png"
                 alt="ENE SAS"
                 width={160}
                 height={45}

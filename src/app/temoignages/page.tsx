@@ -5,6 +5,16 @@ import { Phone, Quote } from "lucide-react";
 
 const testimonials = [
   {
+    name: "RFC Travaux Publics et Privés",
+    role: "Installateur professionnel",
+    instagramId: "DYEjNawMOBL",
+    text: `Installation Fosse Septique : Filtre Compact 15 EH — le plus grand filtre compact mono cuve posé par l'entreprise RFC Travaux Publics et Privés à ce jour.
+
+Chez RFC Travaux Publics et Privés, ils s'occupent de tout : étude et préparation du projet, dossiers et démarches SPANC, terrassement et installation, raccordements, et remise en état complète du terrain.
+
+Un accompagnement du début jusqu'à la fin, avec sérieux et professionnalisme.`,
+  },
+  {
     name: "Jean DELEUME",
     role: "Maire de Mars-sur-Allier (58)",
     videoId: "qjX93px88CI?si=QQQCnvHmIul9HJwJ",
@@ -53,17 +63,32 @@ export default function TemoignagesPage() {
         <div className="max-w-4xl mx-auto px-4 space-y-12">
           {testimonials.map((t) => (
             <article key={t.name} className="border border-gray-200 bg-white">
-              {/* Video */}
-              <div className="relative w-full aspect-video bg-black">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${t.videoId}`}
-                  title={`Témoignage ${t.name}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
+              {/* Media */}
+              {"videoId" in t && t.videoId && (
+                <div className="relative w-full aspect-video bg-black">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${t.videoId}`}
+                    title={`Témoignage ${t.name}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              )}
+              {"instagramId" in t && t.instagramId && (
+                <div className="w-full bg-white flex flex-col items-center">
+                  <iframe
+                    src={`https://www.instagram.com/p/${t.instagramId}/embed/captioned`}
+                    title={`Témoignage ${t.name}`}
+                    loading="lazy"
+                    className="w-full border-0"
+                    style={{ minHeight: "500px", maxWidth: "100%" }}
+                    allowFullScreen
+                    scrolling="no"
+                  />
+                </div>
+              )}
 
               {/* Text */}
               <div className="p-5 sm:p-8">

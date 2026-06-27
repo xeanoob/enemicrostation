@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-4 py-2 sm:py-3 flex items-center justify-between">
           <Link href="/">
             <Image
-              src="/images/logo-ene.jpeg"
+              src="/images/logo-ene.png"
               alt="ENE SAS"
               width={200}
               height={56}

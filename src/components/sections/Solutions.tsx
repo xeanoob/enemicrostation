@@ -29,7 +29,7 @@ const solutions = [
     title: "Réutilisation eau de pluie",
     desc: "Systèmes de stockage et de valorisation de l'eau de pluie pour réduire votre consommation d'eau potable.",
     href: "/produits#eau-pluie",
-    image: "/images/chantier.jpeg",
+    image: "/images/eau-pluie.jpeg",
   },
 ];
 
