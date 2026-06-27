@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
 const defaultGallery = [
@@ -20,8 +20,9 @@ export default async function LivraisonPage() {
   let phone = "02 48 76 02 84";
 
   try {
-    if (isSanityConfigured) {
-      const sanityLivraison = await client.fetch(`*[_type == "livraison"][0]`);
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
+      const sanityLivraison = await sanityClient.fetch(`*[_type == "livraison"][0]`);
       if (sanityLivraison) {
         title = sanityLivraison.title || title;
         subtitle = sanityLivraison.subtitle || subtitle;
@@ -33,7 +34,7 @@ export default async function LivraisonPage() {
         }
       }
 
-      const sanitySettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+      const sanitySettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (sanitySettings) {
         phone = sanitySettings.phone || phone;
       }

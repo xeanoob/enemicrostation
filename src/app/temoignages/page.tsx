@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Phone, Quote } from "lucide-react";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
 
 const defaultTestimonials = [
   {
@@ -44,9 +44,9 @@ export default async function TemoignagesPage() {
   let testimonials = defaultTestimonials;
 
   try {
-    // Only try to fetch if Sanity is configured
-    if (isSanityConfigured) {
-      const sanityTestimonials = await client.fetch(`*[_type == "testimonial"]`);
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
+      const sanityTestimonials = await sanityClient.fetch(`*[_type == "testimonial"]`);
       if (sanityTestimonials && sanityTestimonials.length > 0) {
         testimonials = sanityTestimonials;
       }

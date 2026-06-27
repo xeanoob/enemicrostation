@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://enemicrostation.fr" },
 };
 
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function Home() {
@@ -23,9 +24,10 @@ export default async function Home() {
   let phone: string | undefined = undefined;
 
   try {
-    if (isSanityConfigured) {
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
       // Fetch homepage configurations
-      const homepageData = await client.fetch(`*[_type == "homepage"][0]`);
+      const homepageData = await sanityClient.fetch(`*[_type == "homepage"][0]`);
       if (homepageData) {
         heroData = {
           title: homepageData.title || "ENE SAS",
@@ -34,7 +36,7 @@ export default async function Home() {
       }
 
       // Fetch products list
-      const sanityProducts = await client.fetch(`*[_type == "product"]`);
+      const sanityProducts = await sanityClient.fetch(`*[_type == "product"]`);
       if (sanityProducts && sanityProducts.length > 0) {
         productsList = sanityProducts.map((p: any) => ({
           title: p.title,
@@ -45,7 +47,7 @@ export default async function Home() {
       }
 
       // Fetch whyUs settings
-      const sanityWhyUs = await client.fetch(`*[_type == "whyUs"][0]`);
+      const sanityWhyUs = await sanityClient.fetch(`*[_type == "whyUs"][0]`);
       if (sanityWhyUs) {
         whyUsData = {
           title: sanityWhyUs.title,
@@ -59,7 +61,7 @@ export default async function Home() {
       }
 
       // Fetch process settings
-      const sanityProcess = await client.fetch(`*[_type == "process"][0]`);
+      const sanityProcess = await sanityClient.fetch(`*[_type == "process"][0]`);
       if (sanityProcess) {
         processData = {
           title: sanityProcess.title,
@@ -70,7 +72,7 @@ export default async function Home() {
       }
 
       // Fetch site settings for phone
-      const sanitySettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+      const sanitySettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (sanitySettings) {
         phone = sanitySettings.phone;
       }

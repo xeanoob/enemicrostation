@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, FileText, Download } from "lucide-react";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
 export default async function FiltreCompactPage() {
@@ -14,8 +14,9 @@ export default async function FiltreCompactPage() {
   let phone = "02 48 76 02 84";
 
   try {
-    if (isSanityConfigured) {
-      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "filtre-compact"][0]`);
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
+      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "filtre-compact"][0]`);
       if (pageData) {
         title = pageData.title || title;
         subtitle = pageData.subtitle || subtitle;
@@ -27,7 +28,7 @@ export default async function FiltreCompactPage() {
         }
       }
 
-      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      const settingsData = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (settingsData) {
         phone = settingsData.phone || phone;
       }

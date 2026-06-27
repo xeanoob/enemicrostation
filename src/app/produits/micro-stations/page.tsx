@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Zap, Volume2, Eye, Wrench, Leaf, DollarSign, ShieldCheck, Award, Phone, Beaker, Wind, FlaskConical, Download, FileText } from "lucide-react";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
 const defaultAdvantages = [
@@ -43,8 +43,9 @@ export default async function MicroStationsPage() {
   let benefits = defaultAdvantages.map(a => a.label);
 
   try {
-    if (isSanityConfigured) {
-      const pageData = await client.fetch(`*[_type == "productPage" && pageId == "micro-stations"][0]`);
+    const sanityClient = await getSanityClient();
+    if (sanityClient) {
+      const pageData = await sanityClient.fetch(`*[_type == "productPage" && pageId == "micro-stations"][0]`);
       if (pageData) {
         title = pageData.title || title;
         subtitle = pageData.subtitle || subtitle;
@@ -63,7 +64,7 @@ export default async function MicroStationsPage() {
         }
       }
 
-      const settingsData = await client.fetch(`*[_type == "siteSettings"][0]`);
+      const settingsData = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (settingsData) {
         phone = settingsData.phone || phone;
       }

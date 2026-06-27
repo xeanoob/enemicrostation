@@ -5,7 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { draftMode } from "next/headers";
 import VisualEditing from "@/components/VisualEditing";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { client, clientWithStega, isSanityConfigured } from "@/sanity/lib/client";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -165,7 +165,8 @@ export default async function RootLayout({
 
   try {
     if (isSanityConfigured) {
-      const sanitySettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+      const sanityClient = isDraftMode ? clientWithStega : client;
+      const sanitySettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
       if (sanitySettings) {
         settings = {
           phone: sanitySettings.phone || settings.phone,

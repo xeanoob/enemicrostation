@@ -11,11 +11,26 @@ export const isSanityConfigured = !!(
   projectId.trim() !== ""
 );
 
+// Standard client for published content
 export const client = isSanityConfigured
   ? createClient({
       projectId,
       dataset,
       apiVersion,
       useCdn: false,
+    })
+  : (null as any);
+
+// Client with stega encoding for visual editing overlays (click-to-edit)
+export const clientWithStega = isSanityConfigured
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion,
+      useCdn: false,
+      stega: {
+        enabled: true,
+        studioUrl: "/studio",
+      },
     })
   : (null as any);
