@@ -242,6 +242,7 @@ export default function MicroStationsPage() {
           <div className="relative w-full aspect-video bg-black border border-gray-200">
             <video 
               controls 
+              preload="none"
               className="absolute inset-0 w-full h-full object-cover"
               poster="/images/chantier.jpeg"
             >
