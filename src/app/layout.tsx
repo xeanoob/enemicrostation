@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { draftMode } from "next/headers";
+import VisualEditing from "@/components/VisualEditing";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -146,13 +149,13 @@ const jsonLd = {
   ],
 };
 
-import { client, isSanityConfigured } from "@/sanity/lib/client";
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   let settings = {
     phone: "02 48 76 02 84",
     email: "contact@ene-sas.fr",
@@ -188,6 +191,7 @@ export default async function RootLayout({
         <Navbar phone={settings.phone} email={settings.email} />
         <main className="flex-1">{children}</main>
         <Footer phone={settings.phone} email={settings.email} address={settings.address} hours={settings.hours} />
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );

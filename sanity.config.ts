@@ -16,7 +16,9 @@ export default defineConfig({
     structureTool(),
     presentationTool({
       previewUrl: {
-        origin: typeof window !== "undefined" ? window.location.origin : "http://localhost:3000",
+        draftMode: {
+          enable: "/api/draft-mode/enable",
+        },
       },
     }),
   ],
