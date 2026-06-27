@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 import { schemaTypes } from "./src/sanity/schemaTypes";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id";
@@ -11,7 +12,14 @@ export default defineConfig({
   title: "ENE SAS - Panel d'administration",
   projectId,
   dataset,
-  plugins: [structureTool()],
+  plugins: [
+    structureTool(),
+    presentationTool({
+      previewUrl: {
+        origin: typeof window !== "undefined" ? window.location.origin : "http://localhost:3000",
+      },
+    }),
+  ],
   schema: {
     types: schemaTypes,
   },
