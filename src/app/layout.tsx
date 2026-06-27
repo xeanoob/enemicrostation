@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | ENE SAS Assainissement",
   },
   description:
-    "ENE SAS (Environnement Nature Équilibre), spécialiste de l'assainissement non collectif depuis 2006. Micro-stations Tricel Novo, filtres compacts Seta, pompes de relevage Calpeda. Installation, entretien et SAV à Sancoins (18) et départements 58, 03, 36, 23, 63.",
+    "ENE SAS (Énergies Nouvelles Environnement), spécialiste de l'assainissement non collectif depuis 2006. Micro-stations Tricel Novo, filtres compacts Seta, pompes de relevage Calpeda. Installation, entretien et SAV à Sancoins (18) et départements 58, 03, 36, 23, 63.",
   keywords: [
     "micro-station épuration",
     "assainissement non collectif",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "épuration eaux usées",
   ],
   authors: [{ name: "ENE SAS" }],
-  creator: "ENE SAS - Environnement Nature Équilibre",
+  creator: "ENE SAS - Énergies Nouvelles Environnement",
   publisher: "ENE SAS",
   formatDetection: { telephone: true, email: true, address: true },
   alternates: { canonical: "https://enemicrostation.fr" },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "https://enemicrostation.fr",
-    siteName: "ENE SAS - Environnement Nature Équilibre",
+    siteName: "ENE SAS - Énergies Nouvelles Environnement",
     title: "ENE SAS - Spécialiste Micro-Station d'Épuration depuis 2006",
     description:
       "Micro-stations Tricel Novo, filtres compacts, pompes de relevage. Installation et entretien dans le Cher (18), Nièvre (58), Allier (03) et départements limitrophes.",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "ENE SAS - Environnement Nature Équilibre - Assainissement",
+        alt: "ENE SAS - Énergies Nouvelles Environnement - Assainissement",
       },
     ],
   },
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "ENE SAS - Environnement Nature Équilibre",
+  name: "ENE SAS - Énergies Nouvelles Environnement",
   description: "Spécialiste de l'assainissement non collectif depuis 2006. Micro-stations Tricel Novo, filtres compacts, pompes de relevage, récupération d'eau de pluie.",
   url: "https://enemicrostation.fr",
   telephone: "+33248760284",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Mentions Légales",
-  description: "Mentions légales et conditions générales d'utilisation du site ENE SAS - Environnement Nature Équilibre. Politique de confidentialité et cookies.",
+  description: "Mentions légales et conditions générales d'utilisation du site ENE SAS - Énergies Nouvelles Environnement. Politique de confidentialité et cookies.",
   alternates: { canonical: "https://enemicrostation.fr/mentions-legales" },
   robots: { index: false, follow: true },
 };

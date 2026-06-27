@@ -30,7 +30,7 @@ export default function Hero() {
             ENE SAS
           </h1>
           <p className="text-xl sm:text-2xl text-primary-200 font-medium mb-4">
-            Environnement Nature Équilibre
+            Énergies Nouvelles Environnement
           </p>
           <p className="text-white/70 text-base md:text-lg mb-3">
             Spécialiste en assainissement depuis 2006
