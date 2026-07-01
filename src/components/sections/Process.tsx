@@ -43,9 +43,11 @@ export default function Process({
             </p>
             <div className="bg-primary-400 text-white p-5">
               <p className="font-bold text-lg mb-1">Appelez-nous au</p>
-              <a href={`tel:${cleanPhone}`} className="text-2xl font-bold hover:underline">
-                {phone}
-              </a>
+              <div className="flex items-center flex-wrap gap-2 text-2xl font-bold mt-1">
+                <a href={`tel:${cleanPhone}`} className="hover:underline">{phone}</a>
+                <span className="text-xl">/</span>
+                <a href="tel:0618127714" className="hover:underline">06 18 12 77 14</a>
+              </div>
               <p className="text-white/80 text-sm mt-2">
                 {infoText}
               </p>

@@ -53,13 +53,12 @@ export default function CTA({
               >
                 Contactez-nous
               </Link>
-              <a
-                href={`tel:${cleanPhone}`}
-                className="px-6 py-3 border border-gray-500 hover:border-white text-white font-semibold transition-colors text-sm flex items-center gap-2"
-              >
+              <div className="px-6 py-3 border border-gray-500 text-white font-semibold transition-colors text-sm flex items-center gap-2">
                 <Phone size={16} />
-                {phone}
-              </a>
+                <a href={`tel:${cleanPhone}`} className="hover:text-primary-400 transition-colors">{phone}</a>
+                <span className="text-gray-400">/</span>
+                <a href="tel:0618127714" className="hover:text-primary-400 transition-colors">06 18 12 77 14</a>
+              </div>
             </div>
           </motion.div>
 

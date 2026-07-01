@@ -137,7 +137,10 @@ const jsonLd = {
       closes: "12:00",
     },
   ],
-  sameAs: ["https://www.facebook.com/ENEmicrostation.epuration"],
+  sameAs: [
+    "https://www.facebook.com/ENEmicrostation.epuration/?locale=fr_FR",
+    "https://instagram.com/enemicrostation"
+  ],
   priceRange: "€€",
   serviceType: [
     "Installation de micro-stations d'épuration",

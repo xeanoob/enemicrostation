@@ -256,9 +256,12 @@ export default async function EauDePluiePage() {
             <Link href="/contact" className="px-6 py-3 bg-white text-primary-500 font-semibold text-sm uppercase hover:bg-gray-100 transition-colors">
               Demander un devis
             </Link>
-            <a href={`tel:${cleanPhone}`} className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-primary-500 transition-colors">
-              <Phone size={16} /> {phone}
-            </a>
+            <div className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center justify-center gap-2">
+              <Phone size={16} />
+              <a href={`tel:${cleanPhone}`} className="hover:text-gray-200 transition-colors">{phone}</a>
+              <span className="text-white/60 mx-1">/</span>
+              <a href="tel:0618127714" className="hover:text-gray-200 transition-colors">06 18 12 77 14</a>
+            </div>
           </div>
         </div>
       </section>

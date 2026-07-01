@@ -19,12 +19,12 @@ export default function NotFound() {
           >
             <Home size={16} /> Retour à l&apos;accueil
           </Link>
-          <a
-            href="tel:0248760284"
-            className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-800 text-gray-800 font-semibold text-sm hover:bg-gray-800 hover:text-white transition-colors"
-          >
-            <Phone size={16} /> 02 48 76 02 84
-          </a>
+          <div className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-800 text-gray-800 font-semibold text-sm">
+            <Phone size={16} />
+            <a href="tel:0248760284" className="hover:text-primary-500 transition-colors">02 48 76 02 84</a>
+            <span className="text-gray-400 mx-1">/</span>
+            <a href="tel:0618127714" className="hover:text-primary-500 transition-colors">06 18 12 77 14</a>
+          </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-200">

@@ -2,6 +2,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
+const FacebookIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
+
+const InstagramIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
 export default function Footer({
   phone = "02 48 76 02 84",
   email = "contact@ene-sas.fr",
@@ -68,9 +82,11 @@ export default function Footer({
                 <MapPin size={16} className="text-primary-400 shrink-0 mt-0.5" />
                 {address}
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex flex-wrap items-center gap-2 text-gray-400">
                 <Phone size={16} className="text-primary-400 shrink-0" />
                 <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors">{phone}</a>
+                <span className="text-gray-600">/</span>
+                <a href="tel:0618127714" className="hover:text-white transition-colors">06 18 12 77 14</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-primary-400 shrink-0" />
@@ -88,14 +104,26 @@ export default function Footer({
       <div className="border-t border-gray-800">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} ENE SAS – Tous droits réservés</p>
-          <a
-            href="https://www.facebook.com/ENEmicrostation.epuration"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
-          >
-            Facebook
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.facebook.com/ENEmicrostation.epuration/?locale=fr_FR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+              aria-label="Facebook"
+            >
+              <FacebookIcon size={20} />
+            </a>
+            <a
+              href="https://instagram.com/enemicrostation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+              aria-label="Instagram"
+            >
+              <InstagramIcon size={20} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

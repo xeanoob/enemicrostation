@@ -54,10 +54,12 @@ export default function Navbar({
 
           {/* Desktop contact info */}
           <div className="hidden md:flex items-center gap-6 text-sm">
-            <a href={`tel:${cleanPhone}`} className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
+            <div className="flex items-center gap-2 text-gray-700 font-medium">
               <Phone size={16} className="text-primary-400" />
-              {phone}
-            </a>
+              <a href={`tel:${cleanPhone}`} className="hover:text-primary-400 transition-colors">{phone}</a>
+              <span className="text-gray-400">/</span>
+              <a href="tel:0618127714" className="hover:text-primary-400 transition-colors">06 18 12 77 14</a>
+            </div>
             <a href={`mailto:${email}`} className="flex items-center gap-2 text-gray-700 hover:text-primary-400 font-medium">
               <Mail size={16} className="text-primary-400" />
               {email}
@@ -69,7 +71,7 @@ export default function Navbar({
 
           {/* Mobile: phone + hamburger */}
           <div className="flex items-center gap-3 md:hidden">
-            <a href="tel:0248760284" className="flex items-center justify-center w-10 h-10 bg-primary-400 text-white" aria-label="Appeler">
+            <a href={`tel:${cleanPhone}`} className="flex items-center justify-center w-10 h-10 bg-primary-400 text-white" aria-label="Appeler">
               <Phone size={18} />
             </a>
             <button
@@ -174,9 +176,12 @@ export default function Navbar({
 
               {/* Mobile contact info */}
               <div className="mt-6 space-y-3">
-                <a href={`tel:${cleanPhone}`} className="flex items-center gap-3 p-4 bg-primary-400 text-white font-semibold text-sm">
-                  <Phone size={18} /> {phone}
-                </a>
+                <div className="flex items-center gap-2 p-4 bg-primary-400 text-white font-semibold text-sm">
+                  <Phone size={18} className="shrink-0" />
+                  <a href={`tel:${cleanPhone}`} className="hover:underline">{phone}</a>
+                  <span className="text-white/60">/</span>
+                  <a href="tel:0618127714" className="hover:underline">06 18 12 77 14</a>
+                </div>
                 <a href={`mailto:${email}`} className="flex items-center gap-3 p-4 bg-gray-100 text-gray-700 text-sm">
                   <Mail size={18} className="text-primary-400" /> {email}
                 </a>

@@ -42,7 +42,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl"
+          className="max-w-3xl"
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-2">
             {title}
@@ -78,13 +78,12 @@ export default function Hero({
             >
               Nos produits
             </Link>
-            <a
-              href={`tel:${cleanPhone}`}
-              className="px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-gray-800 font-semibold transition-colors text-sm flex items-center gap-2"
-            >
+            <div className="px-6 py-3 border-2 border-white text-white font-semibold text-sm flex items-center gap-2">
               <Phone size={16} />
-              {phone}
-            </a>
+              <a href={`tel:${cleanPhone}`} className="hover:text-primary-300 transition-colors">{phone}</a>
+              <span className="text-white/60 mx-1">/</span>
+              <a href="tel:0618127714" className="hover:text-primary-300 transition-colors">06 18 12 77 14</a>
+            </div>
           </div>
         </motion.div>
       </div>
