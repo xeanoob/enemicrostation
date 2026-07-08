@@ -106,7 +106,7 @@ export default function Footer({
           <p>© {new Date().getFullYear()} ENE SAS – Tous droits réservés</p>
           <div className="flex items-center gap-4">
             <a
-              href="https://www.facebook.com/ENEmicrostation.epuration/?locale=fr_FR"
+              href="https://facebook.com/profile.php?id=61551548193738"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"

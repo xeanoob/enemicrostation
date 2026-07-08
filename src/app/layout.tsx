@@ -138,7 +138,7 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    "https://www.facebook.com/ENEmicrostation.epuration/?locale=fr_FR",
+    "https://facebook.com/profile.php?id=61551548193738",
     "https://instagram.com/enemicrostation"
   ],
   priceRange: "€€",

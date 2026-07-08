@@ -105,7 +105,7 @@ export default async function ContactPage() {
               <div className="p-5 bg-gray-50 border border-gray-200 flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <FacebookIcon size={18} className="text-primary-400" />
-                  <a href="https://www.facebook.com/ENEmicrostation.epuration/?locale=fr_FR" target="_blank" rel="noopener noreferrer" className="font-bold text-gray-800 text-sm hover:text-primary-400 transition-colors">
+                  <a href="https://facebook.com/profile.php?id=61551548193738" target="_blank" rel="noopener noreferrer" className="font-bold text-gray-800 text-sm hover:text-primary-400 transition-colors">
                     Suivez-nous sur Facebook
                   </a>
                 </div>

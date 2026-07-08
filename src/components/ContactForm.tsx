@@ -16,11 +16,36 @@ const requestTypes = [
 export default function ContactForm() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
   const [form, setForm] = useState({ type: "", name: "", phone: "", email: "", postalCode: "", city: "", message: "" });
 
   const update = (field: string, value: string) => setForm((p) => ({ ...p, [field]: value }));
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(false);
+    try {
+      const response = await fetch("https://formspree.io/f/xdarvyzl", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -97,11 +122,12 @@ export default function ContactForm() {
               Suivant <ChevronRight size={16} />
             </button>
           ) : (
-            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white text-sm font-semibold hover:bg-gray-700 transition-colors">
-              <Send size={16} /> Envoyer
+            <button type="submit" disabled={submitting} className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white text-sm font-semibold hover:bg-gray-700 transition-colors disabled:opacity-50">
+              <Send size={16} /> {submitting ? "Envoi..." : "Envoyer"}
             </button>
           )}
         </div>
+        {error && <p className="text-red-500 text-sm mt-4">Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.</p>}
       </form>
     </div>
   );
